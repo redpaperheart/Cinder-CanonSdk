@@ -19,10 +19,13 @@
     <header>lib/EDSDK/Header/EDSDK.h</header>
     <header>lib/EDSDK/Header/EDSDKErrors.h</header>
     <header>lib/EDSDK/Header/EDSDKTypes.h</header>
-    <framework>lib/EDSDK/Framework/EDSDK.framework</framework>
-    <framework>lib/EDSDK/Framework/DPP.framework</framework>
-    <buildcopy>lib/EDSDK/Framework/EDSDK.framework</buildcopy>
-    <buildcopy>lib/EDSDK/Framework/DPP.framework</buildcopy>
-    <frameworkPath>lib/EDSDK/Framework/</frameworkPath>
+    <platform os="macosx">
+        <framework>lib/EDSDK/Framework/EDSDK.framework</framework>
+        <framework>lib/EDSDK/Framework/DPP.framework</framework>
+        <buildcopy>lib/EDSDK/Framework/EDSDK.framework</buildcopy>
+        <buildcopy>lib/EDSDK/Framework/DPP.framework</buildcopy>
+        <frameworkPath>lib/EDSDK/Framework/</frameworkPath>
+    </platform>
   </block>
+  <template>templates/CanonBasic/template.xml</template>
 </cinder>
