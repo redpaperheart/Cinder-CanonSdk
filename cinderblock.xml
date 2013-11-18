@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <cinder>
   <block
-  	name="Cinder-CanonSdk"
-  	id="com.redpaperheart.canon"
-  	author="Red Paper Heart"
-    git="https://github.com/redpaperheart/Cinder-CanonSdk"
-  	summary="Cinder block to interface with Canon cameras."
+    name="Cinder-CanonSdk"
+    id="com.redpaperheart.canon"
+    git="https://github.com/redpaperheart/Cinder-CanonSdk.git"
+    author="Red Paper Heart"
+    summary="Cinder block to interface with Canon cameras."
     version="2.13"
+    url="https://github.com/redpaperheart/Cinder-CanonSdk"
     library="https://www.didp.canon-europa.com/"
-  	>
-  	<supports os="macosx" />
+    >
+    <supports os="macosx" />
     <includePath>include</includePath>
     <header>include/CanonDebug.h</header>
     <header>include/CinderCanon.h</header>
@@ -22,8 +23,8 @@
     <platform os="macosx">
         <framework>lib/EDSDK/Framework/EDSDK.framework</framework>
         <framework>lib/EDSDK/Framework/DPP.framework</framework>
-        <buildcopy>lib/EDSDK/Framework/EDSDK.framework</buildcopy>
-        <buildcopy>lib/EDSDK/Framework/DPP.framework</buildcopy>
+        <buildcopy destination="Frameworks">lib/EDSDK/Framework/EDSDK.framework</buildcopy>
+        <buildcopy destination="Frameworks">lib/EDSDK/Framework/DPP.framework</buildcopy>
         <frameworkPath>lib/EDSDK/Framework/</frameworkPath>
     </platform>
   </block>
