@@ -358,7 +358,13 @@ EdsError EDSCALLBACK CinderCanon::handleStateEvent(
                                                  )
 {
 	switch(inEvent) {
-            // Connection with camera lost (maybe power off?)
+		// Request auto shut-off timer extension
+		case kEdsStateEvent_WillSoonShutDown: {
+			CinderCanon * cc = (CinderCanon *)inContext;
+			cc->sendCommand( cc->mCamera, kEdsCameraCommand_ExtendShutDownTimer, 0 );
+			break;
+		}
+		// Connection with camera lost (maybe power off?)
 		case kEdsStateEvent_Shutdown: {
 //			shutdown();
 			break;
