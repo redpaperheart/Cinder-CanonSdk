@@ -1,3 +1,10 @@
+#project specific
+lib/EDSDK/Framework/DPP.framework/
+lib/EDSDK/Framework/EDSDK.framework/
+lib/EDSDK/Header/EDSDK.h
+lib/EDSDK/Header/EDSDKErrors.h
+lib/EDSDK/Header/EDSDKTypes.h
+
 # Xcode
 build/
 xcuserdata/
