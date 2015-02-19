@@ -85,7 +85,7 @@ public:
     void downloadImage(EdsDirectoryItemRef dirItem, PhotoHandler * photoHandler);
     
     void downloadData(){ downloadEvfData(mCamera); };
-    Surface8u getLiveSurface() const{ return mLivePixels; }
+    Surface8uRef getLiveSurface() const{ return Surface8u::create(mLivePixels); }
 
     bool isCameraConnected(){ return bCameraIsConnected; };
     int getNumConnectedCameras();
