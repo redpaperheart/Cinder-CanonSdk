@@ -2,6 +2,10 @@
 build/
 xcuserdata/
 
-# OS X 
+# OS X
 .DS_Store
 profile
+
+#ignore sdks
+lib/EDSDK/Framework/*.framework
+lib/EDSDK/Header/*.h

@@ -131,16 +131,16 @@ bool CanonCamera::isLiveViewing() {
 }
 
 int CanonCamera::getWidth() {
-    if( mCanon.getLiveSurface() ){
+//    if( mCanon.getLiveSurface() ){
         return mCanon.getLiveSurface().getWidth();
-    }
+//    }
     return 0;
 }
 
 int CanonCamera::getHeight() {
-    if( mCanon.getLiveSurface() ){
+//    if( mCanon.getLiveSurface() ){
         return mCanon.getLiveSurface().getHeight();
-    }
+//    }
     return 0;
 }
 
@@ -162,10 +162,12 @@ void CanonCamera::update() {
 void CanonCamera::draw(Rectf drawingRect) {
     gl::color( Color::white() );
     Surface sf = mCanon.getLiveSurface();
-    if( sf ) {
-        Rectf sfRect = sf.getBounds();
-        if(drawingRect.getWidth() == 0) gl::draw( gl::Texture( sf ));
-        else gl::draw( gl::Texture( sf ), Area(sfRect.getCenteredFit( drawingRect, true )) );
-    }
+    Rectf sfRect = sf.getBounds();
+    gl::draw( gl::Texture::create(sf), Area(sfRect.getCenteredFit( drawingRect, true )) );
+//    if( sf ) {
+//        Rectf sfRect = sf.getBounds();
+//        if(drawingRect.getWidth() == 0) gl::draw( gl::Texture( sf ));
+//        else gl::draw( gl::Texture( sf ), Area(sfRect.getCenteredFit( drawingRect, true )) );
+//    }
 }
 

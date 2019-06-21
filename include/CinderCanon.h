@@ -36,7 +36,7 @@
 
 #pragma once
 
-#include "cinder/app/AppBasic.h"
+#include "cinder/app/App.h"
 #include "cinder/ImageIo.h"
 
 #define __MACOS__
@@ -67,8 +67,8 @@ class CinderCanon {
 
 public:
     
-    typedef boost::function<void (EdsDirectoryItemRef directoryItem, EdsError error)> PhotoTakenCallback;
-    typedef boost::function<void (const std::string & downloadPath, EdsError error)> ImageDownloadedCallback;
+    typedef std::function<void (EdsDirectoryItemRef directoryItem, EdsError error)> PhotoTakenCallback;
+    typedef std::function<void (const std::string & downloadPath, EdsError error)> ImageDownloadedCallback;
 
     CinderCanon();
     

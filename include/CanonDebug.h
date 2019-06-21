@@ -122,9 +122,9 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_CurrentFolder: {
 			return "Current folder";
 		}
-		case kEdsPropID_MyMenu: {
-			return "My menu";
-		}
+//        case kEdsPropID_MyMenu: {
+//            return "My menu";
+//        }
 		case kEdsPropID_BatteryQuality: {
 			return "Battery quality";
 		}
@@ -134,9 +134,9 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_ImageQuality: {
 			return "Image quality";
 		}
-		case kEdsPropID_JpegQuality: {
-			return "JPEG quality";
-		}
+//        case kEdsPropID_JpegQuality: {
+//            return "JPEG quality";
+//        }
 		case kEdsPropID_Orientation: {
 			return "Orientation";
 		}
@@ -146,9 +146,9 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_FocusInfo: {
 			return "Focus info";
 		}
-		case kEdsPropID_DigitalExposure: {
-			return "Digital exposure";
-		}
+//        case kEdsPropID_DigitalExposure: {
+//            return "Digital exposure";
+//        }
 		case kEdsPropID_WhiteBalance: {
 			return "White balance";
 		}
@@ -158,39 +158,39 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_WhiteBalanceShift: {
 			return "White balance shift";
 		}
-		case kEdsPropID_Contrast: {
-			return "Contrast";
-		}
-		case kEdsPropID_ColorSaturation: {
-			return "Color staturation";
-		}
-		case kEdsPropID_ColorTone: {
-			return "Color tone";
-		}
-		case kEdsPropID_Sharpness: {
-			return "Sharpness";
-		}
+//        case kEdsPropID_Contrast: {
+//            return "Contrast";
+//        }
+//        case kEdsPropID_ColorSaturation: {
+//            return "Color staturation";
+//        }
+//        case kEdsPropID_ColorTone: {
+//            return "Color tone";
+//        }
+//        case kEdsPropID_Sharpness: {
+//            return "Sharpness";
+//        }
 		case kEdsPropID_ColorSpace: {
 			return "Color space";
 		}
-		case kEdsPropID_ToneCurve: {
-			return "Tone curve";
-		}
-		case kEdsPropID_PhotoEffect: {
-			return "Photo effect";
-		}
-		case kEdsPropID_FilterEffect: {
-			return "Filter effect";
-		}
-		case kEdsPropID_ToningEffect: {
-			return "Toning effect";
-		}
-		case kEdsPropID_ParameterSet: {
-			return "Parameter set";
-		}
-		case kEdsPropID_ColorMatrix: {
-			return "Color matrix";
-		}
+//        case kEdsPropID_ToneCurve: {
+//            return "Tone curve";
+//        }
+//        case kEdsPropID_PhotoEffect: {
+//            return "Photo effect";
+//        }
+//        case kEdsPropID_FilterEffect: {
+//            return "Filter effect";
+//        }
+//        case kEdsPropID_ToningEffect: {
+//            return "Toning effect";
+//        }
+//        case kEdsPropID_ParameterSet: {
+//            return "Parameter set";
+//        }
+//        case kEdsPropID_ColorMatrix: {
+//            return "Color matrix";
+//        }
 		case kEdsPropID_PictureStyle: {
 			return "Picture style";
 		}
@@ -203,15 +203,15 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_PictureStyleCaption: {
 			return "Picture style caption";
 		}
-		case kEdsPropID_Linear: {
-			return "Linear";
-		}
-		case kEdsPropID_ClickWBPoint: {
-			return "Click WBPoint";
-		}
-		case kEdsPropID_WBCoeffs: {
-			return "WB Coeffs";
-		}
+//        case kEdsPropID_Linear: {
+//            return "Linear";
+//        }
+//        case kEdsPropID_ClickWBPoint: {
+//            return "Click WBPoint";
+//        }
+//        case kEdsPropID_WBCoeffs: {
+//            return "WB Coeffs";
+//        }
 		case kEdsPropID_GPSVersionID: {
 			return "GPS version ID";
 		}
@@ -248,9 +248,9 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_GPSDateStamp: {
 			return "GPS Datestamp";
 		}
-		case kEdsPropID_AtCapture_Flag: {
-			return "At capture flag";
-		}
+//        case kEdsPropID_AtCapture_Flag: {
+//            return "At capture flag";
+//        }
 		case kEdsPropID_AEMode: {
 			return "AE mode";
 		}
@@ -275,9 +275,9 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_ExposureCompensation: {
 			return "Exposure compensation";
 		}
-		case kEdsPropID_FlashCompensation: {
-			return "Flash compensation";
-		}
+//        case kEdsPropID_FlashCompensation: {
+//            return "Flash compensation";
+//        }
 		case kEdsPropID_FocalLength: {
 			return "Focal length";
 		}
@@ -323,12 +323,12 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_Copyright: {
 			return "Copyright";
 		}
-		case kEdsPropID_DepthOfField: {
-			return "Depth of field";
-		}
-		case kEdsPropID_EFCompensation: {
-			return "EF compensation";
-		}
+//        case kEdsPropID_DepthOfField: {
+//            return "Depth of field";
+//        }
+//        case kEdsPropID_EFCompensation: {
+//            return "EF compensation";
+//        }
 		case kEdsPropID_Evf_OutputDevice: {
 			return "Evf output device";
 		}
@@ -350,9 +350,9 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_Evf_ZoomPosition: {
 			return "Evf zoom position";
 		}
-		case kEdsPropID_Evf_FocusAid: {
-			return "Evf focus aid";
-		}
+//        case kEdsPropID_Evf_FocusAid: {
+//            return "Evf focus aid";
+//        }
 		case kEdsPropID_Evf_Histogram: {
 			return "Evf historgram";
 		}

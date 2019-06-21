@@ -194,7 +194,7 @@ EdsError CinderCanon::downloadEvfData( EdsCameraRef camera )
     }
     
     // Display image
-    EdsUInt32 length;
+    EdsUInt64 length;
     unsigned char* image_data;
     EdsGetLength( stream, &length );
     if( length <= 0 ) return EDS_ERR_OK;
@@ -202,8 +202,10 @@ EdsError CinderCanon::downloadEvfData( EdsCameraRef camera )
     EdsGetPointer( stream, (EdsVoid**)&image_data );
     
     // reserve memory
-    Buffer buffer( image_data, length );    
-    mLivePixels = Surface( loadImage( DataSourceBuffer::create(buffer), ImageSource::Options(), "jpg" ) );
+//    Buffer buffer( image_data, length );
+//    mLivePixels = Surface( loadImage( DataSourceBuffer::create(buffer), ImageSource::Options(), "jpg" ) );
+    BufferRef bufferRef = Buffer::create( image_data, length );
+    mLivePixels = Surface( loadImage( DataSourceBuffer::create(bufferRef), ImageSource::Options(), "jpg" ) );
     bFrameNew = true;
     
     // Release stream
