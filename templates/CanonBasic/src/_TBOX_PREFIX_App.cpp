@@ -1,6 +1,7 @@
-#include "cinder/app/AppNative.h"
+#include "cinder/app/App.h"
 #include "cinder/Utilities.h"
 #include "cinder/gl/gl.h"
+#include "cinder/app/RendererGl.h"
 #include "cinder/gl/Texture.h"
 #include "cinder/Timeline.h"
 
@@ -10,7 +11,7 @@
 using namespace ci;
 
 // Subclass from Photohandler to handle full-res photos once they are downloaded
-class _TBOX_PREFIX_App : public AppNative, public canon::PhotoHandler
+class _TBOX_PREFIX_App : public App, public canon::PhotoHandler
 {
 public:
 	void prepareSettings( Settings *settings ) {};
@@ -18,15 +19,15 @@ public:
 	void update();
 	void draw();
     void shutdown();
-    
+
     void keyDown( KeyEvent event );
     void takePhoto();
-    
+
     // Delegate callbacks from canon::PhotoHandler
     void photoTaken(EdsDirectoryItemRef directoryItem, EdsError error);
     void photoDownloaded(const std::string & downloadPath, EdsError error);
     std::string photoDownloadDirectory();
-    
+
     CanonCamera                 mCamera;
     fs::path                    mPhotoDownloadFolder;
     Anim<float>                 mFlashAlpha;
@@ -37,7 +38,7 @@ void _TBOX_PREFIX_App::setup()
     mFlashAlpha = 0.0f;
     mPhotoDownloadFolder = getHomeDirectory()/"Documents"/"Canon Pictures";
     if (!fs::exists(mPhotoDownloadFolder)) fs::create_directories(mPhotoDownloadFolder);
-    
+
     mCamera.setup();
     mCamera.startLiveView();}
 
@@ -56,7 +57,7 @@ void _TBOX_PREFIX_App::draw()
     gl::enableAlphaBlending();
     gl::clear(Color::black());
     if(mCamera.isLiveViewing()) mCamera.draw(getWindowBounds());
-    
+
     if (mFlashAlpha > 0.0f) {
         gl::color(1.0f, 1.0f, 1.0f, mFlashAlpha);
         gl::drawSolidRect(getWindowBounds());
@@ -108,4 +109,4 @@ std::string _TBOX_PREFIX_App::photoDownloadDirectory()
 }
 
 
-CINDER_APP_NATIVE( _TBOX_PREFIX_App, RendererGl )
+CINDER_APP( _TBOX_PREFIX_App, RendererGl )
