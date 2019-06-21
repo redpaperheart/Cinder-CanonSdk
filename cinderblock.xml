@@ -22,9 +22,9 @@
     <header>lib/EDSDK/Header/EDSDKTypes.h</header>
     <platform os="macosx">
         <framework>lib/EDSDK/Framework/EDSDK.framework</framework>
-        <framework>lib/EDSDK/Framework/DPP.framework</framework>
+        <!-- <framework>lib/EDSDK/Framework/DPP.framework</framework> -->
         <buildcopy destination="Frameworks">lib/EDSDK/Framework/EDSDK.framework</buildcopy>
-        <buildcopy destination="Frameworks">lib/EDSDK/Framework/DPP.framework</buildcopy>
+        <!-- <buildcopy destination="Frameworks">lib/EDSDK/Framework/DPP.framework</buildcopy> -->
         <frameworkPath>lib/EDSDK/Framework/</frameworkPath>
     </platform>
   </block>
