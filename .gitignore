@@ -6,6 +6,8 @@ xcuserdata/
 .DS_Store
 profile
 
-#ignore sdks
+#ignore sdks mac + win
 lib/EDSDK/Framework/*.framework
 lib/EDSDK/Header/*.h
+lib/EDSDK/Library/*.lib
+lib/EDSDK/Dll/*.dll
