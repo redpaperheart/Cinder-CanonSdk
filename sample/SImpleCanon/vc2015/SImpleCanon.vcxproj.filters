@@ -1,0 +1,82 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Blocks">
+      <UniqueIdentifier>{A48EE033-495D-49A4-B4C2-EF864934F0FC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-CanonSdk">
+      <UniqueIdentifier>{C5F6C1D8-9E43-4D7B-A0F1-4A5178FB899B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-CanonSdk\include">
+      <UniqueIdentifier>{99F27AD0-D0FC-4F57-9332-14F1B7DB1069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-CanonSdk\src">
+      <UniqueIdentifier>{78A5DDB3-EA8D-44D2-849A-F3E165A7B2EB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-CanonSdk\lib">
+      <UniqueIdentifier>{B95B9533-D650-476F-83C0-E3F1C3682B3D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-CanonSdk\lib\EDSDK">
+      <UniqueIdentifier>{E6C78768-4AC5-4003-A40A-426F73EB7E06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Cinder-CanonSdk\lib\EDSDK\Header">
+      <UniqueIdentifier>{FC6B92A7-98F5-4AF7-B86E-7C6383C28753}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\SimpleCanonApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClCompile Include="..\src\SimpleCanonApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\..\include\CanonCamera.h">
+      <Filter>Blocks\Cinder-CanonSdk\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CanonDebug.h">
+      <Filter>Blocks\Cinder-CanonSdk\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\CinderCanon.h">
+      <Filter>Blocks\Cinder-CanonSdk\include</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\src\CanonCamera.cpp">
+      <Filter>Blocks\Cinder-CanonSdk\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\CinderCanon.cpp">
+      <Filter>Blocks\Cinder-CanonSdk\src</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\..\lib\EDSDK\Header\EDSDK.h">
+      <Filter>Blocks\Cinder-CanonSdk\lib\EDSDK\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lib\EDSDK\Header\EDSDKErrors.h">
+      <Filter>Blocks\Cinder-CanonSdk\lib\EDSDK\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lib\EDSDK\Header\EDSDKTypes.h">
+      <Filter>Blocks\Cinder-CanonSdk\lib\EDSDK\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

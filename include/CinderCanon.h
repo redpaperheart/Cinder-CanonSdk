@@ -39,7 +39,10 @@
 #include "cinder/app/App.h"
 #include "cinder/ImageIo.h"
 
-#define __MACOS__
+//define macos on apple, used in EDSDK headers
+#ifdef  __APPLE__
+	#define __MACOS__
+#endif
 
 #include "EDSDK.h"
 #include "EDSDKErrors.h"
