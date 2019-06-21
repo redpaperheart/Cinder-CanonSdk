@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720219952D00008149E2 /* AVFoundation.framework */; };
+		006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720319952D00008149E2 /* CoreMedia.framework */; };
+		0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0091D8F80E81B9330029341E /* OpenGL.framework */; };
+		00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784AF0FF439BC000DE1D7 /* Accelerate.framework */; };
+		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
+		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
+		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
+		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		91739427D7994056A8925E89 /* EDSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37FA5FC00C894EFC812C7ECC /* EDSDK.framework */; };
+		142CED2D42F4451B958BC210 /* EDSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FA5FC00C894EFC812C7ECC /* EDSDK.framework */; };
+		77138D242C5742AFAF56B3D7 /* EDSDKTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = FE044F68CACB45CB95B5AD96 /* EDSDKTypes.h */; };
+		37E279EF4B9C4105BF00F3CD /* EDSDKErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 403F9E264BB343BA92921F42 /* EDSDKErrors.h */; };
+		609EC0CCAB02496C85DADB31 /* EDSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E299841DDAA4A52B542AE80 /* EDSDK.h */; };
+		A97B127CE97F40939F6AB835 /* CinderCanon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8CF8B3E7CD84415B2325D44 /* CinderCanon.cpp */; };
+		CEF4009DD4DA42D68DA3E51E /* CanonCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D43665FD4374B47A4B3BBF0 /* CanonCamera.cpp */; };
+		080FA9C2FAEE4E4F98366F9E /* CinderCanon.h in Headers */ = {isa = PBXBuildFile; fileRef = 74210E59D9EC40D4A3263A05 /* CinderCanon.h */; };
+		0DD93E3C41D54688B51442E5 /* CanonDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = C48AF2660D034876885028C7 /* CanonDebug.h */; };
+		CC6B459D69954A34A08FBE4E /* CanonCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F4B352E537401A98D5AC9A /* CanonCamera.h */; };
+		5DB60C3852894EF797973886 /* SImpleCanonApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13D61C437CB46C299B09473 /* SImpleCanonApp.cpp */; };
+		E379F68AC47A4BA787F1B4AD /* SImpleCanon_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C34036742EF3464E8CC91601 /* SImpleCanon_Prefix.pch */; };
+		B5DF2D54F3A145719060605C /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 300FA4DCFE1A48A8BC448442 /* CinderApp.icns */; };
+		72E06AEB4B90405A936F9615 /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DFE21C3D150405490C2D484 /* Resources.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		006D720219952D00008149E2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		006D720319952D00008149E2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0091D8F80E81B9330029341E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		00B784AF0FF439BC000DE1D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		8D1107320486CEB800E47090 /* SImpleCanon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SImpleCanon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DFE21C3D150405490C2D484 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
+		300FA4DCFE1A48A8BC448442 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
+		8FDFC6ADFF004D5982AE39BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
+		C34036742EF3464E8CC91601 /* SImpleCanon_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = SImpleCanon_Prefix.pch; sourceTree = "<group>"; name = SImpleCanon_Prefix.pch; };
+		D13D61C437CB46C299B09473 /* SImpleCanonApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/SImpleCanonApp.cpp; sourceTree = "<group>"; name = SImpleCanonApp.cpp; };
+		50F4B352E537401A98D5AC9A /* CanonCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../include/CanonCamera.h; sourceTree = "<group>"; name = CanonCamera.h; };
+		C48AF2660D034876885028C7 /* CanonDebug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../include/CanonDebug.h; sourceTree = "<group>"; name = CanonDebug.h; };
+		74210E59D9EC40D4A3263A05 /* CinderCanon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../include/CinderCanon.h; sourceTree = "<group>"; name = CinderCanon.h; };
+		7D43665FD4374B47A4B3BBF0 /* CanonCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/CanonCamera.cpp; sourceTree = "<group>"; name = CanonCamera.cpp; };
+		E8CF8B3E7CD84415B2325D44 /* CinderCanon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../../../src/CinderCanon.cpp; sourceTree = "<group>"; name = CinderCanon.cpp; };
+		4E299841DDAA4A52B542AE80 /* EDSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../lib/EDSDK/Header/EDSDK.h; sourceTree = "<group>"; name = EDSDK.h; };
+		403F9E264BB343BA92921F42 /* EDSDKErrors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../lib/EDSDK/Header/EDSDKErrors.h; sourceTree = "<group>"; name = EDSDKErrors.h; };
+		FE044F68CACB45CB95B5AD96 /* EDSDKTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../../../lib/EDSDK/Header/EDSDKTypes.h; sourceTree = "<group>"; name = EDSDKTypes.h; };
+		37FA5FC00C894EFC812C7ECC /* EDSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ../../../lib/EDSDK/Framework/EDSDK.framework; sourceTree = "<group>"; name = EDSDK.framework; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */,
+				006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
+				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
+				00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */,
+				00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */,
+				00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */,
+				00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */,
+				00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */,
+				00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */,
+				142CED2D42F4451B958BC210 /* EDSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D13D61C437CB46C299B09473 /* SImpleCanonApp.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				006D720219952D00008149E2 /* AVFoundation.framework */,
+				006D720319952D00008149E2 /* CoreMedia.framework */,
+				00B784AF0FF439BC000DE1D7 /* Accelerate.framework */,
+				00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */,
+				00B784B10FF439BC000DE1D7 /* AudioUnit.framework */,
+				00B784B20FF439BC000DE1D7 /* CoreAudio.framework */,
+				5323E6B10EAFCA74003A9687 /* CoreVideo.framework */,
+				0091D8F80E81B9330029341E /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				00B995581B128DF400A5C623 /* IOKit.framework */,
+				00B995591B128DF400A5C623 /* IOSurface.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* SImpleCanon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* SImpleCanon */ = {
+			isa = PBXGroup;
+			children = (
+				01B97315FEAEA392516A2CEA /* Blocks */,
+				29B97315FDCFA39411CA2CEA /* Headers */,
+				080E96DDFE201D6D7F000001 /* Source */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = SImpleCanon;
+			sourceTree = "<group>";
+		};
+		E269424B32ED4827A18E6603 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				50F4B352E537401A98D5AC9A /* CanonCamera.h */,
+				C48AF2660D034876885028C7 /* CanonDebug.h */,
+				74210E59D9EC40D4A3263A05 /* CinderCanon.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		6A5B63C36C7B4CD5A000A544 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7D43665FD4374B47A4B3BBF0 /* CanonCamera.cpp */,
+				E8CF8B3E7CD84415B2325D44 /* CinderCanon.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		0CE7C55E955E4137956B266A /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				4E299841DDAA4A52B542AE80 /* EDSDK.h */,
+				403F9E264BB343BA92921F42 /* EDSDKErrors.h */,
+				FE044F68CACB45CB95B5AD96 /* EDSDKTypes.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		C733E755A74B4EC390F291F9 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				37FA5FC00C894EFC812C7ECC /* EDSDK.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		55935F27F5C649C799AE59AA /* EDSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0CE7C55E955E4137956B266A /* Header */,
+				C733E755A74B4EC390F291F9 /* Framework */,
+			);
+			name = EDSDK;
+			sourceTree = "<group>";
+		};
+		6CAE7B30A78D466480A7FD2D /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				55935F27F5C649C799AE59AA /* EDSDK */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		4799439073034045B1B0ED8A /* Cinder-CanonSdk */ = {
+			isa = PBXGroup;
+			children = (
+				E269424B32ED4827A18E6603 /* include */,
+				6A5B63C36C7B4CD5A000A544 /* src */,
+				6CAE7B30A78D466480A7FD2D /* lib */,
+			);
+			name = "Cinder-CanonSdk";
+			sourceTree = "<group>";
+		};
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				4799439073034045B1B0ED8A /* Cinder-CanonSdk */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				0DFE21C3D150405490C2D484 /* Resources.h */,
+				C34036742EF3464E8CC91601 /* SImpleCanon_Prefix.pch */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				300FA4DCFE1A48A8BC448442 /* CinderApp.icns */,
+				8FDFC6ADFF004D5982AE39BA /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* SImpleCanon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "SImpleCanon" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				6B70AB49A1F44DAB82D82AD3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SImpleCanon;
+			productInstallPath = "$(HOME)/Applications";
+			productName = SImpleCanon;
+			productReference = 8D1107320486CEB800E47090 /* SImpleCanon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SImpleCanon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* SImpleCanon */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* SImpleCanon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5DF2D54F3A145719060605C /* CinderApp.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DB60C3852894EF797973886 /* SImpleCanonApp.cpp in Sources */,
+				CEF4009DD4DA42D68DA3E51E /* CanonCamera.cpp in Sources */,
+				A97B127CE97F40939F6AB835 /* CinderCanon.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = SImpleCanon_Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/macosx/$(CONFIGURATION)/libcinder.a\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = SImpleCanon;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+				FRAMEWORK_SEARCH_PATHS = (
+					../../../lib/EDSDK/Framework,
+				);
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = SImpleCanon_Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/macosx/$(CONFIGURATION)/libcinder.a\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = SImpleCanon;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+				FRAMEWORK_SEARCH_PATHS = (
+					../../../lib/EDSDK/Framework,
+				);
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = "../../../../..";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CLANG_CXX_LIBRARY = "libc++";
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(CINDER_PATH)/include\" ../include",
+					../../../include,
+					../../../src,
+					../../../lib/EDSDK/Header,
+				);
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = "../../../../..";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(CINDER_PATH)/include\" ../include",
+					../../../include,
+					../../../src,
+					../../../lib/EDSDK/Header,
+				);
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "SImpleCanon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SImpleCanon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+		6B70AB49A1F44DAB82D82AD3 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				91739427D7994056A8925E89 /* EDSDK.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
