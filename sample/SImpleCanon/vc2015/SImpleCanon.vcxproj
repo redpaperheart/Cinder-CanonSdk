@@ -18,10 +18,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{048B3510-2CB0-4CB1-A3DF-3FE28B1E44B1}</ProjectGuid>
-    <RootNamespace>SImpleCanon</RootNamespace>
+    <ProjectGuid>{F835901F-9972-4B36-8F5B-181BE40723E2}</ProjectGuid>
+    <RootNamespace>SimpleCanon</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -216,7 +215,7 @@
     <ClInclude Include="..\..\..\lib\EDSDK\Header\EDSDKTypes.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\SImpleCanonApp.cpp" />
+    <ClCompile Include="..\src\SimpleCanonApp.cpp" />
     <ClCompile Include="..\..\..\src\CanonCamera.cpp" />
     <ClCompile Include="..\..\..\src\CinderCanon.cpp" />
   </ItemGroup>

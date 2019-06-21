@@ -13,35 +13,35 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
     <Filter Include="Blocks">
-      <UniqueIdentifier>{A2D71D13-9E4B-403A-BF66-0FDBC2BC6680}</UniqueIdentifier>
+      <UniqueIdentifier>{A48EE033-495D-49A4-B4C2-EF864934F0FC}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-CanonSdk">
-      <UniqueIdentifier>{5EF5D2C7-4200-47A9-AA70-0EB37CD8EEAA}</UniqueIdentifier>
+      <UniqueIdentifier>{C5F6C1D8-9E43-4D7B-A0F1-4A5178FB899B}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-CanonSdk\include">
-      <UniqueIdentifier>{0EB51495-DB2B-4AF2-9689-9D46F09F270E}</UniqueIdentifier>
+      <UniqueIdentifier>{99F27AD0-D0FC-4F57-9332-14F1B7DB1069}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-CanonSdk\src">
-      <UniqueIdentifier>{8D430C36-4043-4F29-9758-E48042D444DC}</UniqueIdentifier>
+      <UniqueIdentifier>{78A5DDB3-EA8D-44D2-849A-F3E165A7B2EB}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-CanonSdk\lib">
-      <UniqueIdentifier>{52958436-2A00-47A0-B845-69FC06297C3B}</UniqueIdentifier>
+      <UniqueIdentifier>{B95B9533-D650-476F-83C0-E3F1C3682B3D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-CanonSdk\lib\EDSDK">
-      <UniqueIdentifier>{06B9CDA4-4083-4B32-A7A6-AB28A8A53880}</UniqueIdentifier>
+      <UniqueIdentifier>{E6C78768-4AC5-4003-A40A-426F73EB7E06}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-CanonSdk\lib\EDSDK\Header">
-      <UniqueIdentifier>{0AABF4F9-E2BE-4CDA-B936-79536EC7BCC9}</UniqueIdentifier>
+      <UniqueIdentifier>{FC6B92A7-98F5-4AF7-B86E-7C6383C28753}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\SImpleCanonApp.cpp">
+    <ClCompile Include="..\src\SimpleCanonApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClInclude Include="..\include\Resources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClCompile Include="..\src\SImpleCanonApp.cpp">
+    <ClCompile Include="..\src\SimpleCanonApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClInclude Include="..\..\..\include\CanonCamera.h">

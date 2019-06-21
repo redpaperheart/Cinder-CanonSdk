@@ -11,7 +11,7 @@
 using namespace ci;
 
 // Subclass from Photohandler to handle full-res photos once they are downloaded
-class SImpleCanonApp : public App, public canon::PhotoHandler
+class SimpleCanonApp : public App, public canon::PhotoHandler
 {
 public:
 	void prepareSettings( Settings *settings ) {};
@@ -33,7 +33,7 @@ public:
     Anim<float>                 mFlashAlpha;
 };
 
-void SImpleCanonApp::setup()
+void SimpleCanonApp::setup()
 {
     mFlashAlpha = 0.0f;
     mPhotoDownloadFolder = getHomeDirectory()/"Documents"/"Canon Pictures";
@@ -44,7 +44,7 @@ void SImpleCanonApp::setup()
 
 
 
-void SImpleCanonApp::update()
+void SimpleCanonApp::update()
 {
     mCamera.update();
     if(mCamera.checkNewFrame()){
@@ -52,7 +52,7 @@ void SImpleCanonApp::update()
     }
 }
 
-void SImpleCanonApp::draw()
+void SimpleCanonApp::draw()
 {
     gl::enableAlphaBlending();
     gl::clear(Color::black());
@@ -64,7 +64,7 @@ void SImpleCanonApp::draw()
     }
 }
 
-void SImpleCanonApp::takePhoto()
+void SimpleCanonApp::takePhoto()
 {
     mCamera.endLiveView();
     mCamera.takePicture(this);
@@ -72,7 +72,7 @@ void SImpleCanonApp::takePhoto()
     timeline().apply(&mFlashAlpha, 0.0f, 3.0f);
 }
 
-void SImpleCanonApp::keyDown( KeyEvent event )
+void SimpleCanonApp::keyDown( KeyEvent event )
 {
     switch (event.getChar())
     {
@@ -83,7 +83,7 @@ void SImpleCanonApp::keyDown( KeyEvent event )
     }
 }
 
-void SImpleCanonApp::shutdown()
+void SimpleCanonApp::shutdown()
 {
     mCamera.shutdown();
 }
@@ -92,21 +92,21 @@ void SImpleCanonApp::shutdown()
 #pragma mark Callbacks from the canon SDK
 //-----------------------------------------------------------------------------------
 
-void SImpleCanonApp::photoTaken(EdsDirectoryItemRef directoryItem, EdsError error)
+void SimpleCanonApp::photoTaken(EdsDirectoryItemRef directoryItem, EdsError error)
 {
     mCamera.downloadImage(directoryItem, this);
 }
 
-void SImpleCanonApp::photoDownloaded(const std::string & downloadPath, EdsError error)
+void SimpleCanonApp::photoDownloaded(const std::string & downloadPath, EdsError error)
 {
     mCamera.startLiveView();
 }
 
 // Delegate method to tell the canon where to download the full-res image.
-std::string SImpleCanonApp::photoDownloadDirectory()
+std::string SimpleCanonApp::photoDownloadDirectory()
 {
     return mPhotoDownloadFolder.generic_string();
 }
 
 
-CINDER_APP( SImpleCanonApp, RendererGl )
+CINDER_APP( SimpleCanonApp, RendererGl )
