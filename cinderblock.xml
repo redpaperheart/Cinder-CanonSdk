@@ -10,16 +10,16 @@
     url="https://github.com/redpaperheart/Cinder-CanonSdk"
     library="https://www.developersupport.canon.com/"
     >
-    <supports os="macosx|msw" />
+    <supports os="msw" />
+    <supports os="macosx" />
     <includePath>include</includePath>
-    <header>include/CanonDebug.h</header>
-    <header>include/CinderCanon.h</header>
-    <header>include/CanonCamera.h</header>
-    <source>src/CinderCanon.cpp</source>
-    <source>src/CanonCamera.cpp</source>
-    <header>lib/EDSDK/Header/EDSDK.h</header>
-    <header>lib/EDSDK/Header/EDSDKErrors.h</header>
-    <header>lib/EDSDK/Header/EDSDKTypes.h</header>
+    <includePath>src</includePath>
+    <headerPattern>include/*.h</headerPattern>
+    <sourcePattern>src/*.cpp</sourcePattern>
+    <!-- sdk headers -->
+    <includePath>lib/EDSDK/Header</includePath>
+    <headerPattern>lib/EDSDK/Header/*.h</headerPattern>
+    <!-- platform Libs + Frameworks -->
     <platform os="macosx">
       <framework>lib/EDSDK/Framework/EDSDK.framework</framework>
       <buildcopy destination="Frameworks">lib/EDSDK/Framework/EDSDK.framework</buildcopy>
