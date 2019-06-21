@@ -6,11 +6,11 @@
     git="https://github.com/redpaperheart/Cinder-CanonSdk.git"
     author="Red Paper Heart"
     summary="Cinder block to interface with Canon cameras."
-    version="2.13"
+    version="2.2"
     url="https://github.com/redpaperheart/Cinder-CanonSdk"
-    library="https://www.didp.canon-europa.com/"
+    library="https://www.developersupport.canon.com/"
     >
-    <supports os="macosx" />
+    <supports os="macosx|msw" />
     <includePath>include</includePath>
     <header>include/CanonDebug.h</header>
     <header>include/CinderCanon.h</header>
@@ -21,11 +21,17 @@
     <header>lib/EDSDK/Header/EDSDKErrors.h</header>
     <header>lib/EDSDK/Header/EDSDKTypes.h</header>
     <platform os="macosx">
-        <framework>lib/EDSDK/Framework/EDSDK.framework</framework>
-        <!-- <framework>lib/EDSDK/Framework/DPP.framework</framework> -->
-        <buildcopy destination="Frameworks">lib/EDSDK/Framework/EDSDK.framework</buildcopy>
-        <!-- <buildcopy destination="Frameworks">lib/EDSDK/Framework/DPP.framework</buildcopy> -->
-        <frameworkPath>lib/EDSDK/Framework/</frameworkPath>
+      <framework>lib/EDSDK/Framework/EDSDK.framework</framework>
+      <buildcopy destination="Frameworks">lib/EDSDK/Framework/EDSDK.framework</buildcopy>
+      <frameworkPath>lib/EDSDK/Framework/</frameworkPath>
+      <!-- <framework>lib/EDSDK/Framework/DPP.framework</framework> -->
+      <!-- <buildcopy destination="Frameworks">lib/EDSDK/Framework/DPP.framework</buildcopy> -->
+    </platform>
+    <platform os="msw">
+      <libraryPath>lib/EDSDK/Library</libraryPath>
+      <staticLibrary absolute="true">EDSDK.lib</staticLibrary>
+      <buildCopy>lib/EDSDK/Dll/EDSDK.dll</buildCopy>
+      <buildCopy>lib/EDSDK/Dll/EdsImage.dll</buildCopy>
     </platform>
   </block>
   <template>templates/CanonBasic/template.xml</template>
