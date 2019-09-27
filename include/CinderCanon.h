@@ -38,6 +38,7 @@
 
 #include "cinder/app/App.h"
 #include "cinder/ImageIo.h"
+#include "cinder/Signals.h"
 
 //define macos on apple, used in EDSDK headers
 #ifdef  __APPLE__
@@ -60,14 +61,15 @@ namespace canon{
 class PhotoHandler
 {
 public:
-    
-    virtual void photoTaken(EdsDirectoryItemRef directoryItem, EdsError error) = 0;
-    virtual void photoDownloaded(const std::string & downloadPath, EdsError error) = 0;
-    virtual std::string photoDownloadDirectory() = 0;
+	
+	virtual void photoTaken(EdsDirectoryItemRef directoryItem, EdsError error) = 0;
+	virtual void photoDownloaded(const std::string & downloadPath, EdsError error) = 0;
+	virtual std::string photoDownloadDirectory() = 0;
 };
    
 using CinderCanonRef = std::shared_ptr<class CinderCanon>;
-class CinderCanon {
+
+class CinderCanon : public canon::PhotoHandler {
 
 public:
 	//shared pointer creation
@@ -76,69 +78,83 @@ public:
 		return std::make_shared<CinderCanon>();
 	}
 
-    typedef std::function<void (EdsDirectoryItemRef directoryItem, EdsError error)> PhotoTakenCallback;
-    typedef std::function<void (const std::string & downloadPath, EdsError error)> ImageDownloadedCallback;
+	typedef std::function<void (EdsDirectoryItemRef directoryItem, EdsError error)> PhotoTakenCallback;
+	typedef std::function<void (const std::string & downloadPath, EdsError error)> ImageDownloadedCallback;
 
-    CinderCanon();
-    
-    void setup( int cameraIndex = 0 );
-    void shutdown();
-    
-    void startLiveView();
-    void endLiveView();
-    bool isLiveViewing()const { return bIsLiveView; };
-    bool getFrameNew() { return bFrameNew; }
-    void setFrameNew(bool b) { bFrameNew = b; }
-    
-    void takePicture(PhotoHandler * photoHandler);
-    void downloadImage(EdsDirectoryItemRef dirItem, PhotoHandler * photoHandler);
-    
-    void downloadData(){ downloadEvfData(mCamera); };
-    Surface8u getLiveSurface() const{ return mLivePixels; }
+	CinderCanon();
+	
+	void setup( int cameraIndex = 0 );
+	void shutdown();
+	
+	void startLiveView();
+	void endLiveView();
+	bool isLiveViewing()const { return bIsLiveView; };
+	bool getFrameNew() { return bFrameNew; }
+	void setFrameNew(bool b) { bFrameNew = b; }
+	
+	void takePicture(PhotoHandler * photoHandler);
+	void downloadImage(EdsDirectoryItemRef dirItem, PhotoHandler * photoHandler);
+	
+	void downloadData(){ downloadEvfData(mCamera); };
+	Surface8u getLiveSurface() const{ return mLivePixels; }
 
-    bool isCameraConnected(){ return bCameraIsConnected; };
-    int getNumConnectedCameras();
+	bool isCameraConnected(){ return bCameraIsConnected; };
+	int getNumConnectedCameras();
 
 	//void pubGetDeviceInfo() {
 	//	getDeviceInfo(mCamera);
 	//}
 	int deviceIndex = -1;
 	std::string deviceBodyId = "none";
+	std::string downloadDirectory = "";
+
+	bool autoDownload = true;
+	bool deleteAfterDownload = true;
 	//create getters?
+
+	//photo handler delegate methods
+	void photoTaken(EdsDirectoryItemRef directoryItem, EdsError error);
+	void photoDownloaded(const std::string& downloadPath, EdsError error);
+	std::string photoDownloadDirectory();
+
+	//signals
+	ci::signals::Signal<void(std::string)> signal_photoTaken; //deviceBodyId
+	ci::signals::Signal<void(std::string, std::string)> signal_photoDownloaded; //deviceBodyId, photoPath
+
   protected:
 
-    Surface8u   mLivePixels;
-    
-    void    getDeviceInfo( EdsCameraRef cam );
+	Surface8u   mLivePixels;
+	
+	void    getDeviceInfo( EdsCameraRef cam );
 	void    storeDeviceSerial(EdsCameraRef cam);
-    bool    sendCommand( EdsCameraRef inCameraRef, EdsUInt32 inCommand, EdsUInt32 inParam );
-    
-    EdsError downloadEvfData( EdsCameraRef camera );
-    
-    EdsCameraRef        mCamera;
-    EdsCameraListRef    mCamera_list;
+	bool    sendCommand( EdsCameraRef inCameraRef, EdsUInt32 inCommand, EdsUInt32 inParam );
+	
+	EdsError downloadEvfData( EdsCameraRef camera );
+	
+	EdsCameraRef        mCamera;
+	EdsCameraListRef    mCamera_list;
 
-    bool                bCameraIsConnected;
-    bool                bIsLiveView;
-    bool                bFrameNew;
-    
-    static EdsError EDSCALLBACK handleObjectEvent(
-                                                   EdsUInt32 inEvent
-                                                  ,EdsBaseRef inRef
-                                                  ,EdsVoid* inContext
-                                                  );
-    
-    static EdsError EDSCALLBACK handlePropertyEvent(
-                                                     EdsUInt32 inEvent
-                                                    ,EdsUInt32 inPropertyID
-                                                    ,EdsUInt32 inParam
-                                                    ,EdsVoid* inContext
-                                                    );
-    static EdsError EDSCALLBACK handleStateEvent(
-                                                    EdsUInt32 inEvent
-                                                   ,EdsUInt32 inParam
-                                                   ,EdsVoid* inContext
-                                                              );
+	bool                bCameraIsConnected;
+	bool                bIsLiveView;
+	bool                bFrameNew;
+	
+	static EdsError EDSCALLBACK handleObjectEvent(
+												   EdsUInt32 inEvent
+												  ,EdsBaseRef inRef
+												  ,EdsVoid* inContext
+												  );
+	
+	static EdsError EDSCALLBACK handlePropertyEvent(
+													 EdsUInt32 inEvent
+													,EdsUInt32 inPropertyID
+													,EdsUInt32 inParam
+													,EdsVoid* inContext
+													);
+	static EdsError EDSCALLBACK handleStateEvent(
+													EdsUInt32 inEvent
+												   ,EdsUInt32 inParam
+												   ,EdsVoid* inContext
+															  );
 
 };
 

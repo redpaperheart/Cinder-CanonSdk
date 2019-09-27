@@ -34,6 +34,8 @@
  *
  */
 
+//resource to canon api https://github.com/jeffcrouse/canon-cli
+
 #pragma once
 
 #include "cinder/app/App.h"
@@ -79,7 +81,9 @@ public:
     const vector<Surface>& getCapturedFrames() { return mCapturedFrames; }
     
     // for advanced use
-    canon::CinderCanon getCannon(){ return mCanon; };
+	//GS : disabled mcanon, will need a rework mCanon should just be stored as a ref
+	//only keep references
+    //canon::CinderCanon getCannon(){ return mCanon; };
 
 	//void getInfo();
 	std::string getSerial();
