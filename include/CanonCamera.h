@@ -47,7 +47,7 @@ using namespace std;
 
 class CanonCamera {
 public:
-    void setup();
+    void setup(int index=0);
     void update();
     void draw(Rectf drawingRect = Rectf(0,0,0,0));
     
@@ -80,6 +80,10 @@ public:
     
     // for advanced use
     canon::CinderCanon getCannon(){ return mCanon; };
+
+	//void getInfo();
+	std::string getSerial();
+	int getIndex();
 
     
 protected:

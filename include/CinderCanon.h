@@ -65,11 +65,17 @@ public:
     virtual void photoDownloaded(const std::string & downloadPath, EdsError error) = 0;
     virtual std::string photoDownloadDirectory() = 0;
 };
-    
+   
+using CinderCanonRef = std::shared_ptr<class CinderCanon>;
 class CinderCanon {
 
 public:
-    
+	//shared pointer creation
+	
+	static CinderCanonRef create() {
+		return std::make_shared<CinderCanon>();
+	}
+
     typedef std::function<void (EdsDirectoryItemRef directoryItem, EdsError error)> PhotoTakenCallback;
     typedef std::function<void (const std::string & downloadPath, EdsError error)> ImageDownloadedCallback;
 
@@ -92,12 +98,19 @@ public:
 
     bool isCameraConnected(){ return bCameraIsConnected; };
     int getNumConnectedCameras();
-    
+
+	//void pubGetDeviceInfo() {
+	//	getDeviceInfo(mCamera);
+	//}
+	int deviceIndex = -1;
+	std::string deviceBodyId = "none";
+	//create getters?
   protected:
 
     Surface8u   mLivePixels;
     
     void    getDeviceInfo( EdsCameraRef cam );
+	void    storeDeviceSerial(EdsCameraRef cam);
     bool    sendCommand( EdsCameraRef inCameraRef, EdsUInt32 inCommand, EdsUInt32 inParam );
     
     EdsError downloadEvfData( EdsCameraRef camera );

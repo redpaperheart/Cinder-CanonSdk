@@ -36,9 +36,9 @@
 
 #include "CanonCamera.h"
 
-void CanonCamera::setup() {
+void CanonCamera::setup(int index) {
     reset();
-    mCanon.setup();
+    mCanon.setup(index);
     mRecordingFPS = 12;
 }
 
@@ -142,6 +142,16 @@ int CanonCamera::getHeight() {
         return mCanon.getLiveSurface().getHeight();
 //    }
     return 0;
+}
+//void CanonCamera::getInfo() {
+//	mCanon.pubGetDeviceInfo();
+//}
+
+std::string CanonCamera::getSerial() {
+	return mCanon.deviceBodyId;
+}
+int CanonCamera::getIndex() {
+	return mCanon.deviceIndex;
 }
 
 // ------------------------------------------------------------------------------

@@ -72,6 +72,9 @@ void CinderCanon::setup( int cameraIndex )
     err = EdsGetChildAtIndex(mCamera_list, cameraIndex, &mCamera );
     if( err != EDS_ERR_OK ){ console() << "Cinder-Canon :: Couldn't retrieve camera from list" << endl; }
     getDeviceInfo( mCamera );
+
+	deviceIndex = cameraIndex;
+	//kEdsPropID_BodyID
     
     err = EdsOpenSession( mCamera );
     if( err != EDS_ERR_OK ){ console() << "Cinder-Canon :: Couldn't open camera session" << endl; }
@@ -81,11 +84,36 @@ void CinderCanon::setup( int cameraIndex )
     EdsSetPropertyEventHandler(mCamera, kEdsPropertyEvent_All, CinderCanon::handlePropertyEvent, (EdsVoid*)this );
     EdsSetCameraStateEventHandler(mCamera, kEdsStateEvent_All, CinderCanon::handleStateEvent, (EdsVoid*)this );
     
+	//once session is open get the serial
+	storeDeviceSerial(mCamera);
+
     bCameraIsConnected = true;
     bFrameNew = false;
     mLivePixels = Surface8u( 1024, 680, false, SurfaceChannelOrder::RGB ); // what about this resolution?
 }
+void CinderCanon::storeDeviceSerial(EdsCameraRef cam) {
+	
+	EdsError err = EDS_ERR_OK;
+	//EdsDataType dataType;
+	//EdsUInt32 dataSize;
+	//EdsGetPropertySize(cam, kEdsPropID_BodyIDEx, 0, &dataType, &dataSize);
+	//console() << "id size"<< dataSize << endl;
 
+	//buffer is actually much bigger
+	//like 4274327 or something
+	char buf[800];
+	
+	err = EdsGetPropertyData(cam, kEdsPropID_BodyIDEx, 0, 800, &buf);
+	
+	if (err != EDS_ERR_OK) {
+		console() << "Cinder-Canon :: Couldn't retrieve Body ID" << endl;
+	}
+	else {
+		std::string bodyId(buf);
+		deviceBodyId = bodyId;
+		console() << "Cinder-Canon :: Body ID :: " << bodyId << endl;
+	}
+}
 void CinderCanon::getDeviceInfo( EdsCameraRef cam )
 {
     EdsError err = EDS_ERR_OK;
@@ -95,6 +123,7 @@ void CinderCanon::getDeviceInfo( EdsCameraRef cam )
     if( err != EDS_ERR_OK ){ console() << "Cinder-Canon :: Couldn't retrieve camera info" << endl; }
     
     console() << "Cinder-Canon :: Device name :: " << info.szDeviceDescription << endl;
+	//console() << "Cinder-Canon :: Device port :: " << info.szPortName << endl; //useless
 }
 
 int CinderCanon::getNumConnectedCameras()
