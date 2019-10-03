@@ -82,9 +82,27 @@ public:
 	typedef std::function<void (const std::string & downloadPath, EdsError error)> ImageDownloadedCallback;
 
 	CinderCanon();
+	~CinderCanon() {
+		console() << "Cinder-Canon :: good bye" << endl;
+		//EdsCloseSession(mCamera);
+		shutdown();
+	}
 	
 	void setup( int cameraIndex = 0 );
 	void shutdown();
+	bool hearbeat() {
+		EdsError err = EDS_ERR_OK;
+		char buf[800];
+
+		err = EdsGetPropertyData(mCamera, kEdsPropID_BodyIDEx, 0, 800, &buf);
+
+		if (err != EDS_ERR_OK) {
+			//console() << "Cinder-Canon :: Couldn't retrieve Body ID" << endl;
+			return false;
+		}
+		//console() << "heartbeat" << endl;
+		return true;
+	}
 	
 	void startLiveView();
 	void endLiveView();
@@ -101,9 +119,8 @@ public:
 	bool isCameraConnected(){ return bCameraIsConnected; };
 	int getNumConnectedCameras();
 
-	//void pubGetDeviceInfo() {
-	//	getDeviceInfo(mCamera);
-	//}
+	void onCameraDisconnected();
+
 	int deviceIndex = -1;
 	std::string deviceBodyId = "none";
 	std::string downloadDirectory = "";

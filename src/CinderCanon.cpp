@@ -70,6 +70,7 @@ void CinderCanon::setup( int cameraIndex )
 	if( getNumConnectedCameras() == 0 ) return;
 	
 	err = EdsGetChildAtIndex(mCamera_list, cameraIndex, &mCamera );
+
 	if( err != EDS_ERR_OK ){ console() << "Cinder-Canon :: Couldn't retrieve camera from list" << endl; }
 	getDeviceInfo( mCamera );
 
@@ -134,6 +135,14 @@ int CinderCanon::getNumConnectedCameras()
 	return numCameras;
 }
 
+void CinderCanon::onCameraDisconnected() {
+	//mark as no longer connected
+	bCameraIsConnected = false;
+	bIsLiveView = false;
+	deviceIndex = -1;
+	//shutdown();
+}
+
 void CinderCanon::takePicture(PhotoHandler * photoHandler)
 {
 	if( !bCameraIsConnected )
@@ -143,8 +152,16 @@ void CinderCanon::takePicture(PhotoHandler * photoHandler)
 	
 	console() << "Cinder-Canon :: Attempting to take picture" << endl;
 	
-	sendCommand( mCamera, kEdsCameraStatusCommand_UILock, 0 );
-	sendCommand( mCamera, kEdsCameraCommand_TakePicture, 0 );
+	bool success = true;
+	if (!sendCommand(mCamera, kEdsCameraStatusCommand_UILock, 0)) success = false;
+	std::string s_str = (success) ? "success" : "failed";
+	console() << "Cinder-Canon :: cam locked: "<< s_str << endl;
+	if (success && sendCommand(mCamera, kEdsCameraCommand_TakePicture, 0)) {
+		console() << "Cinder-Canon :: take picture success" << endl;
+	}
+	else {
+		console() << "Cinder-Canon :: take picture FAILED" << endl;
+	}
 }
 
 void CinderCanon::startLiveView()
@@ -415,9 +432,13 @@ bool CinderCanon::sendCommand( EdsCameraRef inCameraRef, EdsUInt32 inCommand, Ed
 	EdsError err = EDS_ERR_OK;
 	
 	err = EdsSendCommand( inCameraRef, inCommand, inParam );
-	
 	if(err != EDS_ERR_OK) {
-		console() << "Cinder-Canon :: error while sending command " <<  CanonErrorToString(err) << "." << endl;
+		console() << "Cinder-Canon :: error while sending command "<<err <<  CanonErrorToString(err) << "." << endl;
+		if (err == EDS_ERR_INVALID_HANDLE) {
+			EdsRelease(inCameraRef);
+			onCameraDisconnected();
+			return false;
+		}
 		if(err == EDS_ERR_DEVICE_BUSY) {
 			return false;
 		}
