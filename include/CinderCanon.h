@@ -110,7 +110,7 @@ public:
 	bool getFrameNew() { return bFrameNew; }
 	void setFrameNew(bool b) { bFrameNew = b; }
 	
-	void takePicture(PhotoHandler * photoHandler);
+	bool takePicture(PhotoHandler * photoHandler);
 	void downloadImage(EdsDirectoryItemRef dirItem, PhotoHandler * photoHandler);
 	
 	void downloadData(){ downloadEvfData(mCamera); };

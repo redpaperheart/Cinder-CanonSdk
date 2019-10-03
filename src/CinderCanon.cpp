@@ -143,10 +143,10 @@ void CinderCanon::onCameraDisconnected() {
 	//shutdown();
 }
 
-void CinderCanon::takePicture(PhotoHandler * photoHandler)
+bool CinderCanon::takePicture(PhotoHandler * photoHandler)
 {
 	if( !bCameraIsConnected )
-		return;
+		return false;
 	
 	SingletonPhotoHandler = photoHandler;
 	
@@ -162,6 +162,7 @@ void CinderCanon::takePicture(PhotoHandler * photoHandler)
 	else {
 		console() << "Cinder-Canon :: take picture FAILED" << endl;
 	}
+	return success;
 }
 
 void CinderCanon::startLiveView()
