@@ -86,12 +86,14 @@ Surface8u CanonCamera::getLiveSurface(){
 // ------------------------------------------------------------------------------
 #pragma mark
 #pragma mark Photo and Recording
-void CanonCamera::takePicture(cinder::canon::PhotoHandler * photoHandler){
-    mCanon.takePicture(photoHandler);
+void CanonCamera::takePicture(){ //cinder::canon::PhotoHandler * photoHandler){
+    //mCanon.takePicture(photoHandler);
+	mCanon.takePicture();
 }
 
-void CanonCamera::downloadImage(EdsDirectoryItemRef dirItem, cinder::canon::PhotoHandler * photoHandler) {
-    mCanon.downloadImage(dirItem, photoHandler);
+void CanonCamera::downloadImage(EdsDirectoryItemRef dirItem) { //, cinder::canon::PhotoHandler * photoHandler) {
+    //mCanon.downloadImage(dirItem, photoHandler);
+	mCanon.downloadImage(dirItem);
 }
 
 void CanonCamera::startRecording() {
@@ -150,9 +152,9 @@ int CanonCamera::getHeight() {
 std::string CanonCamera::getSerial() {
 	return mCanon.deviceBodyId;
 }
-int CanonCamera::getIndex() {
-	return mCanon.deviceIndex;
-}
+//int CanonCamera::getIndex() {
+//	return mCanon.deviceIndex;
+//}
 
 // ------------------------------------------------------------------------------
 #pragma mark

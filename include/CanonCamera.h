@@ -66,8 +66,8 @@ public:
     void startRecording();
     void toggleRecording();
     
-    void takePicture(canon::PhotoHandler * photoHandler);
-    void downloadImage(EdsDirectoryItemRef dirItem, canon::PhotoHandler * photoHandler);
+	void takePicture(); // canon::PhotoHandler* photoHandler);
+	void downloadImage(EdsDirectoryItemRef dirItem); // , canon::PhotoHandler* photoHandler);
 
     bool isBusy() { return false; }
     bool isLiveViewing();
@@ -87,10 +87,10 @@ public:
 
 	//void getInfo();
 	std::string getSerial();
-	int getIndex();
+	//int getIndex();
 
-    
 protected:
+	
     bool    bRecording;
     bool    bFrameNew;
     int     mRecordingFPS;
