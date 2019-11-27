@@ -117,6 +117,7 @@ void ci::canon::CanonCamera::setup(EdsCameraRef cameraRef) {
 
 	//err = getPropertyDescFromCamera(kEdsPropID_ISOSpeed);
 	//err = setProperty(kEdsPropID_ISOSpeed, 0x7d);
+	//lockUI();
 }
 
 int ci::canon::CanonCamera::getNumConnectedCameras() {
@@ -156,6 +157,23 @@ void ci::canon::CanonCamera::getDeviceInfo( EdsCameraRef cam ) {
 	CI_LOG_I("Cinder-Canon :: Device name :: " << info.szDeviceDescription);
 }
 
+EdsError ci::canon::CanonCamera::lockUI() {
+	EdsError err = EdsSendStatusCommand(mCamera, kEdsCameraStatusCommand_UILock, 0);
+	if (err == EDS_ERR_OK) {
+		CI_LOG_D("UI locked.");
+		mUILocked = true;
+	}
+	return err;
+}
+EdsError ci::canon::CanonCamera::unlockUI() {
+	EdsError err = EdsSendStatusCommand(mCamera, kEdsCameraStatusCommand_UIUnLock, 0);
+	if (err == EDS_ERR_OK) {
+		CI_LOG_D("UI unlocked.");
+		mUILocked = false;
+	}
+	return err;
+}
+
 bool ci::canon::CanonCamera::takePicture() //PhotoHandler * photoHandler)
 {
 	if (!isCameraConnected()) {
@@ -163,12 +181,19 @@ bool ci::canon::CanonCamera::takePicture() //PhotoHandler * photoHandler)
 		return false;
 	}
 	
-	CI_LOG_D( "------------------------------------------------------ ");
-	CI_LOG_I( deviceBodyId << " :: Attempting to take picture ");
+	//CI_LOG_D( "------------------------------------------------------ ");
+	CI_LOG_I( deviceBodyId << " :: Attempting to take picture ------------------------------------------------------");
 
-	bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely);
-	sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_OFF);
-	return success;
+	//if (lockUI() == EDS_ERR_OK) {
+		bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely_NonAF);
+		//bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely);
+		sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_OFF);
+		//unlockUI();
+		return success;
+	/*}
+	else {
+		return false;
+	}*/
 }
 
 void ci::canon::CanonCamera::startLiveView()
@@ -292,6 +317,8 @@ void ci::canon::CanonCamera::downloadImage(EdsDirectoryItemRef dirItem) //, Phot
 		CI_LOG_E(deviceBodyId << " NOT CONNECTED");
 		return;
 	}
+
+	//lockUI();
 	EdsError err = EDS_ERR_OK;
 	EdsStreamRef stream = NULL;
 
@@ -377,6 +404,7 @@ void ci::canon::CanonCamera::downloadImage(EdsDirectoryItemRef dirItem) //, Phot
 	{
 		photoHandler->photoDownloaded(downloadPath.generic_string(), err);
 	}*/
+	//unlockUI();
 	photoDownloaded(downloadPath.generic_string(), err);
 }
 
@@ -416,7 +444,7 @@ EdsError EDSCALLBACK ci::canon::CanonCamera::handleObjectEvent(EdsUInt32 inEvent
 
 EdsError EDSCALLBACK ci::canon::CanonCamera::handlePropertyEvent( EdsUInt32 inEvent, EdsUInt32 inPropertyID, EdsUInt32 inParam, EdsVoid* inContext ) {
 	ci::canon::CanonCamera* cc = (ci::canon::CanonCamera*)inContext;
-	CI_LOG_D(cc->deviceBodyId << " ::  Property Event :: " << CanonEventToString(inEvent) << " :: " << CanonPropertyToString(inPropertyID));
+	CI_LOG_D(cc->deviceBodyId << " :: Property Event :: " << CanonEventToString(inEvent) << " :: " << CanonPropertyToString(inPropertyID));
 	
 	if( inPropertyID == kEdsPropID_Evf_OutputDevice ){
 		CI_LOG_D("ready for live viewing");
@@ -481,6 +509,7 @@ EdsError ci::canon::CanonCamera::getPropertyFromCamera(EdsPropertyID propertyID)
 	EdsUInt32   dataSize = 0;
 
 	if (propertyID == kEdsPropID_Unknown) {
+		CI_LOG_D(deviceBodyId << " :: propertyID == kEdsPropID_Unknown :: If unknown is returned for the property ID , the required property must be retrieved again");
 		//If unknown is returned for the property ID , the required property must be retrieved again
 		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_AEModeSelect);
 		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_Tv);

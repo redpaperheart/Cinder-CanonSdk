@@ -105,6 +105,9 @@ namespace cinder {
 			bool isLiveViewing()const { return bIsLiveView; };
 			bool getFrameNew() { return bFrameNew; }
 			void setFrameNew(bool b) { bFrameNew = b; }
+
+			EdsError lockUI();
+			EdsError unlockUI();
 	
 			bool takePicture(); // PhotoHandler* photoHandler);
 			void downloadImage(EdsDirectoryItemRef dirItem); // , PhotoHandler* photoHandler);
@@ -159,6 +162,8 @@ namespace cinder {
 			EdsError downloadEvfData( EdsCameraRef camera );
 
 			Surface8u mLivePixels;
+
+			bool mUILocked = false;
 			
 			// Model name
 			std::string _modelName;
