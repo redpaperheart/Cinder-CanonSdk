@@ -160,7 +160,7 @@ void ci::canon::CanonCamera::getDeviceInfo( EdsCameraRef cam ) {
 EdsError ci::canon::CanonCamera::lockUI() {
 	EdsError err = EdsSendStatusCommand(mCamera, kEdsCameraStatusCommand_UILock, 0);
 	if (err == EDS_ERR_OK) {
-		CI_LOG_D("UI locked.");
+		CI_LOG_D(deviceBodyId << " :: UI locked.");
 		mUILocked = true;
 	}
 	return err;
@@ -181,19 +181,12 @@ bool ci::canon::CanonCamera::takePicture() //PhotoHandler * photoHandler)
 		return false;
 	}
 	
-	//CI_LOG_D( "------------------------------------------------------ ");
 	CI_LOG_I( deviceBodyId << " :: Attempting to take picture ------------------------------------------------------");
-
-	//if (lockUI() == EDS_ERR_OK) {
-		bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely_NonAF);
-		//bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely);
-		sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_OFF);
-		//unlockUI();
-		return success;
-	/*}
-	else {
-		return false;
-	}*/
+	
+	//bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely_NonAF);
+	bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely);
+	sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_OFF);
+	return success;
 }
 
 void ci::canon::CanonCamera::startLiveView()
@@ -228,7 +221,7 @@ void ci::canon::CanonCamera::endLiveView()
 		return;
 	}
 	if (!bIsLiveView) {
-		CI_LOG_D(deviceBodyId << " LiveView not running");
+		//CI_LOG_D(deviceBodyId << " LiveView not running");
 		return;
 	}
 	EdsError err = EDS_ERR_OK;
@@ -417,20 +410,9 @@ EdsError EDSCALLBACK ci::canon::CanonCamera::handleObjectEvent(EdsUInt32 inEvent
 		//case kEdsObjectEvent_DirItemRequestTransfer:
 		case kEdsObjectEvent_DirItemCreated:
 		{
-			//if (SingletonPhotoHandler)
-			//{
-				CI_LOG_D("Photo Taken. Calling photoTaken");
-				EdsDirectoryItemRef dirItem = (EdsDirectoryItemRef)inRef;
-				// NOTE: This is only called on success.
-				// It should also be called on failure.
-				//SingletonPhotoHandler->photoTaken(dirItem, EDS_ERR_OK);
-				cc->photoTaken(dirItem, EDS_ERR_OK);
-			//}
-			//else {
-				//console() << "No photo callback. Ignoring." << endl;
-				// This downloads to /tmp/canon
-				// ((CinderCanon *)inContext)->downloadImage(inRef, NULL);
-			//}
+			CI_LOG_D(cc->deviceBodyId << " :: Object Event :: Photo Taken. Calling photoTaken");
+			EdsDirectoryItemRef dirItem = (EdsDirectoryItemRef)inRef;
+			cc->photoTaken(dirItem, EDS_ERR_OK);
 			break;
 		}
 	}
@@ -444,10 +426,10 @@ EdsError EDSCALLBACK ci::canon::CanonCamera::handleObjectEvent(EdsUInt32 inEvent
 
 EdsError EDSCALLBACK ci::canon::CanonCamera::handlePropertyEvent( EdsUInt32 inEvent, EdsUInt32 inPropertyID, EdsUInt32 inParam, EdsVoid* inContext ) {
 	ci::canon::CanonCamera* cc = (ci::canon::CanonCamera*)inContext;
-	CI_LOG_D(cc->deviceBodyId << " :: Property Event :: " << CanonEventToString(inEvent) << " :: " << CanonPropertyToString(inPropertyID));
+	CI_LOG_D(cc->deviceBodyId << " :: Property Event :: " << CanonEventToString(inEvent) << " :: Property: " << CanonPropertyToString(inPropertyID) << ", param:" << std::to_string(inParam) );
 	
 	if( inPropertyID == kEdsPropID_Evf_OutputDevice ){
-		CI_LOG_D("ready for live viewing");
+		CI_LOG_D(cc->deviceBodyId << " :: ready for live viewing");
 	}
 	switch (inEvent) {
 		case kEdsPropertyEvent_PropertyChanged:
@@ -498,7 +480,7 @@ bool ci::canon::CanonCamera::sendCommand( EdsCameraRef inCameraRef, EdsUInt32 in
 	return true;
 }
 
-EdsError ci::canon::CanonCamera::getPropertyFromCamera(EdsPropertyID propertyID){
+EdsError ci::canon::CanonCamera::getPropertyFromCamera(EdsPropertyID propertyID, EdsInt32  inParam){
 	if (!isCameraConnected()) {
 		CI_LOG_E(deviceBodyId << " :: NOT CONNECTED");
 		return EDS_ERR_COMM_DISCONNECTED;
@@ -508,41 +490,45 @@ EdsError ci::canon::CanonCamera::getPropertyFromCamera(EdsPropertyID propertyID)
 	EdsDataType	dataType = kEdsDataType_Unknown;
 	EdsUInt32   dataSize = 0;
 
+	CI_LOG_D(deviceBodyId << " :: " << CanonPropertyToString(propertyID) << " :: param: " << std::to_string(inParam));
+
 	if (propertyID == kEdsPropID_Unknown) {
 		CI_LOG_D(deviceBodyId << " :: propertyID == kEdsPropID_Unknown :: If unknown is returned for the property ID , the required property must be retrieved again");
 		//If unknown is returned for the property ID , the required property must be retrieved again
-		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_AEModeSelect);
-		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_Tv);
-		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_Av);
-		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_ISOSpeed);
-		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_MeteringMode);
-		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_ExposureCompensation);
-		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_ImageQuality);
+		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_AEModeSelect, inParam);
+		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_Tv, inParam);
+		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_Av, inParam);
+		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_ISOSpeed, inParam);
+		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_MeteringMode, inParam);
+		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_ExposureCompensation, inParam);
+		if (err == EDS_ERR_OK) err = getPropertyFromCamera(kEdsPropID_ImageQuality, inParam);
 
 		return err;
 	}
 
 	//Acquisition of the property size
 	if (err == EDS_ERR_OK) {
-		err = EdsGetPropertySize(mCamera, propertyID, 0, &dataType, &dataSize);
+		err = EdsGetPropertySize(mCamera, propertyID, inParam, &dataType, &dataSize);
 	}
 
 	if (err == EDS_ERR_OK) {
 		if (dataType == kEdsDataType_UInt32) {
 			EdsUInt32 data;
 			//Acquisition of the property
-			err = EdsGetPropertyData(mCamera, propertyID, 0, dataSize, &data);
+			err = EdsGetPropertyData(mCamera, propertyID, inParam, dataSize, &data);
+			/*if (propertyID == kEdsPropID_CFn && err == EDS_ERR_OK) {
+				CI_LOG_D(deviceBodyId << " :: " << CanonPropertyToString(propertyID) << ":: data: " << data);
+			}*/
 			//Acquired property value is set
-			if (err == EDS_ERR_OK) { setPropertyUInt32(propertyID, data); }
-		}
-
+			if (err == EDS_ERR_OK ) { setPropertyUInt32(propertyID, data); }
+		} else 
 		if (dataType == kEdsDataType_String) {
 			EdsChar str[EDS_MAX_NAME];
 			//Acquisition of the property
 			err = EdsGetPropertyData(mCamera, propertyID, 0, dataSize, str);
 			//Acquired property value is set
 			if (err == EDS_ERR_OK) { setPropertyString(propertyID, str);}
-		}
+		} else 
 		if (dataType == kEdsDataType_FocusInfo) {
 			EdsFocusInfo focusInfo;
 			//Acquisition of the property
@@ -550,6 +536,16 @@ EdsError ci::canon::CanonCamera::getPropertyFromCamera(EdsPropertyID propertyID)
 			//Acquired property value is set
 			if (err == EDS_ERR_OK){ setFocusInfo(focusInfo);}
 		}
+		else {
+			CI_LOG_W(deviceBodyId << " :: unhandled dataType for " << CanonPropertyToString(propertyID));
+		}
+	}
+	else {
+		CI_LOG_W(deviceBodyId << " :: Warning - could not get PropertySize :: " << CanonErrorToString(err));
+	}
+
+	if (err != EDS_ERR_OK) {
+		CI_LOG_W(deviceBodyId << " :: Warning - could not receive property data :: " << CanonErrorToString(err));
 	}
 
 	//Update notification
@@ -566,8 +562,11 @@ EdsError ci::canon::CanonCamera::getPropertyDescFromCamera(EdsPropertyID propert
 	EdsError  err = EDS_ERR_OK;
 	EdsPropertyDesc	 propertyDesc = { 0 };
 
+	CI_LOG_D(deviceBodyId << " :: " << CanonPropertyToString(propertyID));
+
 	if (propertyID == kEdsPropID_Unknown) {
 		//If unknown is returned for the property ID , the required property must be retrieved again
+		CI_LOG_D(deviceBodyId << " :: propertyID == kEdsPropID_Unknown :: If unknown is returned for the property ID , the required property must be retrieved again");
 		if (err == EDS_ERR_OK) err = getPropertyDescFromCamera(kEdsPropID_AEModeSelect);
 		if (err == EDS_ERR_OK) err = getPropertyDescFromCamera(kEdsPropID_Tv);
 		if (err == EDS_ERR_OK) err = getPropertyDescFromCamera(kEdsPropID_Av);
@@ -586,6 +585,10 @@ EdsError ci::canon::CanonCamera::getPropertyDescFromCamera(EdsPropertyID propert
 	//The value list that can be the acquired setting it is set		
 	if (err == EDS_ERR_OK){
 		setPropertyDesc(propertyID, &propertyDesc);
+	}
+
+	if (err != EDS_ERR_OK) {
+		CI_LOG_W(deviceBodyId << " :: Warning :: " << CanonErrorToString(err));
 	}
 
 	return err;

@@ -118,10 +118,11 @@ namespace cinder {
 			bool isCameraConnected(){ return bCameraIsConnected; };
 			int getNumConnectedCameras();
 
-			EdsError getPropertyFromCamera(EdsPropertyID propertyID);
+			EdsError getPropertyFromCamera(EdsPropertyID propertyID, EdsInt32  inParam = 0);
 			EdsError getPropertyDescFromCamera(EdsPropertyID propertyID);
 			bool setProperty(EdsPropertyID propertyID, EdsUInt32 data)
 			{
+				CI_LOG_D(deviceBodyId << " :: " << CanonPropertyToString(propertyID));
 				EdsError err = EDS_ERR_OK;
 				err = EdsSetPropertyData(mCamera, propertyID, 0, sizeof(data), (EdsVoid*)&data);
 
@@ -184,6 +185,7 @@ namespace cinder {
 			EdsPoint  _evfZoomPosition;
 			EdsRect	  _evfZoomRect;
 			EdsUInt32 _evfAFMode;
+			EdsUInt32 _AFMode;
 
 			EdsFocusInfo _focusInfo;
 
@@ -216,11 +218,24 @@ namespace cinder {
 
 			// Taking a picture parameter
 			void setAEMode(EdsUInt32 value) { _AEMode = value; }
-			void setTv(EdsUInt32 value) { _Tv = value; CI_LOG_D(deviceBodyId << " :: _Tv: " << CanonTvPropertyDataToString(value));}
-			void setAv(EdsUInt32 value) { _Av = value; CI_LOG_D(deviceBodyId << " :: _Av: " << value); }
-			void setIso(EdsUInt32 value) { _Iso = value; CI_LOG_D(deviceBodyId << " :: _Iso: " << CanonIsoPropertyDataToString(value)); }
+			void setTv(EdsUInt32 value) { 
+				_Tv = value; 
+				CI_LOG_D(deviceBodyId << " :: _Tv: " << CanonTvPropertyDataToString(value));
+			}
+			void setAv(EdsUInt32 value) { 
+				_Av = value; 
+				CI_LOG_D(deviceBodyId << " :: _Av: " << CanonAvPropertyDataToString(value));
+			}
+			void setIso(EdsUInt32 value) { 
+				_Iso = value; 
+				CI_LOG_D(deviceBodyId << " :: _Iso: " << CanonIsoPropertyDataToString(value)); 
+			}
+			void setExposureCompensation(EdsUInt32 value) { 
+				_ExposureCompensation = value; 
+				CI_LOG_D(deviceBodyId << " :: _ExposureCompensation: " << value); 
+			}
+			void setAFMode(EdsUInt32 value) { _AFMode = value; CI_LOG_D(deviceBodyId << " :: _AFMode: " << value << " :: " << CanonAFModeDataToString(value)); }
 			void setMeteringMode(EdsUInt32 value) { _MeteringMode = value; CI_LOG_D(deviceBodyId << " :: _MeteringMode: " << value); }
-			void setExposureCompensation(EdsUInt32 value) { _ExposureCompensation = value; CI_LOG_D(deviceBodyId << " :: _ExposureCompensation: " << value); }
 			void setImageQuality(EdsUInt32 value) { _ImageQuality = value; CI_LOG_D(deviceBodyId << " :: _ImageQuality: " << value); }
 			void setEvfMode(EdsUInt32 value) { _evfMode = value; CI_LOG_D(deviceBodyId << " :: _evfMode: " << value); }
 			void setEvfOutputDevice(EdsUInt32 value) { _evfOutputDevice = value; CI_LOG_D(deviceBodyId << " :: _evfOutputDevice: " << value); }
@@ -261,10 +276,22 @@ namespace cinder {
 			EdsPropertyDesc getEvfAFModeDesc()	const { return _evfAFModeDesc; }
 
 			//List of value in which taking a picture parameter can be set
-			void setAEModeDesc(const EdsPropertyDesc* desc) { _AEModeDesc = *desc;  CI_LOG_D(deviceBodyId << " :: _AEModeDesc: " << CanonPropertyDescToString(desc)); }
-			void setAvDesc(const EdsPropertyDesc* desc) { _AvDesc = *desc;  CI_LOG_D(deviceBodyId << " :: _AvDesc: " << CanonAvPropertyDescToString(desc)); }
-			void setTvDesc(const EdsPropertyDesc* desc) { _TvDesc = *desc;  CI_LOG_D(deviceBodyId << " :: _TvDesc: " << CanonTvPropertyDescToString(desc)); }
-			void setIsoDesc(const EdsPropertyDesc* desc) { _IsoDesc = *desc; CI_LOG_D(deviceBodyId << " :: _IsoDesc: " << CanonIsoPropertyDescToString(desc)); }
+			void setAEModeDesc(const EdsPropertyDesc* desc) { 
+				_AEModeDesc = *desc;  
+				CI_LOG_D(deviceBodyId << " :: _AEModeDesc: " << CanonPropertyDescToString(desc)); 
+			}
+			void setAvDesc(const EdsPropertyDesc* desc) { 
+				_AvDesc = *desc;  
+				CI_LOG_D(deviceBodyId << " :: _AvDesc: " << CanonAvPropertyDescToString(desc)); 
+			}
+			void setTvDesc(const EdsPropertyDesc* desc) { 
+				_TvDesc = *desc;  
+				CI_LOG_D(deviceBodyId << " :: _TvDesc: " << CanonTvPropertyDescToString(desc)); 
+			}
+			void setIsoDesc(const EdsPropertyDesc* desc) { 
+				_IsoDesc = *desc; 
+				CI_LOG_D(deviceBodyId << " :: _IsoDesc: " << CanonIsoPropertyDescToString(desc)); 
+			}
 			void setMeteringModeDesc(const EdsPropertyDesc* desc) { _MeteringModeDesc = *desc; CI_LOG_D(deviceBodyId << " :: _MeteringModeDesc: " << CanonPropertyDescToString(desc)); }
 			void setExposureCompensationDesc(const EdsPropertyDesc* desc) { _ExposureCompensationDesc = *desc; CI_LOG_D(deviceBodyId << " :: _ExposureCompensationDesc: " << CanonPropertyDescToString(desc)); }
 			void setImageQualityDesc(const EdsPropertyDesc* desc) { _ImageQualityDesc = *desc; CI_LOG_D(deviceBodyId << " :: _ImageQualityDesc: " << CanonPropertyDescToString(desc)); }
@@ -286,6 +313,8 @@ namespace cinder {
 				case kEdsPropID_Evf_OutputDevice:		setEvfOutputDevice(value);			break;
 				case kEdsPropID_Evf_DepthOfFieldPreview:setEvfDepthOfFieldPreview(value);	break;
 				case kEdsPropID_Evf_AFMode:				setEvfAFMode(value);				break;
+				case kEdsPropID_AFMode:					setAFMode(value);					break;
+				default:								CI_LOG_W(deviceBodyId << " :: unhandled property :: " << CanonPropertyToString(propertyID) << " :: " << std::to_string(value)); break;
 				}
 			}
 
@@ -301,6 +330,9 @@ namespace cinder {
 				case kEdsPropID_ProductName:
 					CI_LOG_I("kEdsPropID_ProductName:" << str);
 					setModelName(str);					
+					break;
+				default:
+					CI_LOG_W(deviceBodyId << " :: unhandled property :: " << CanonPropertyToString(propertyID) << " :: " << str); 
 					break;
 				}
 			}
