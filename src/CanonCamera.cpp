@@ -79,22 +79,26 @@ void ci::canon::CanonCamera::setup( int cameraIndex ) {
 
 	if (err != EDS_ERR_OK) { CI_LOG_E("Cinder-Canon :: Couldn't retrieve camera from list"); }
 
-	setup(mCamera);
+	setup(mCamera, cameraIndex);
 }
 
-void ci::canon::CanonCamera::setup(EdsCameraRef cameraRef) {
+void ci::canon::CanonCamera::setup(EdsCameraRef cameraRef, int cameraIndex) {
 	if (bCameraIsConnected) {
 		CI_LOG_E("CAMERA IS ALREADY SET UP AND CONNECTED");
 		return;
 	}
 	mCamera = cameraRef;
+	deviceIndex = cameraIndex;
 
 	EdsError err = EDS_ERR_OK;
 	getDeviceInfo(mCamera);
 
 	try {
 		err = EdsOpenSession(mCamera);
-		if (err != EDS_ERR_OK) { CI_LOG_E("Couldn't open camera session"); }
+		if (err != EDS_ERR_OK) { 
+			CI_LOG_E("Couldn't open camera session"); 
+			return;
+		}
 	}
 	catch (...) {
 		CI_LOG_E("EDS OPEN SESSION FAILED.");
@@ -428,7 +432,7 @@ EdsError EDSCALLBACK ci::canon::CanonCamera::handleObjectEvent(EdsUInt32 inEvent
 
 EdsError EDSCALLBACK ci::canon::CanonCamera::handlePropertyEvent( EdsUInt32 inEvent, EdsUInt32 inPropertyID, EdsUInt32 inParam, EdsVoid* inContext ) {
 	ci::canon::CanonCamera* cc = (ci::canon::CanonCamera*)inContext;
-	CI_LOG_D(cc->deviceBodyId << " :: Property Event :: " << CanonEventToString(inEvent) << " :: Property: " << CanonPropertyToString(inPropertyID) << ", param:" << std::to_string(inParam) );
+	CI_LOG_D(cc->deviceBodyId << " :: Property Event :: " << CanonEventToString(inEvent) << " :: Property: " << CanonPropertyToString(inPropertyID)); // << ", param:" << std::to_string(inParam) );
 	
 	if( inPropertyID == kEdsPropID_Evf_OutputDevice ){
 		CI_LOG_D(cc->deviceBodyId << " :: ready for live viewing");
@@ -597,7 +601,7 @@ EdsError ci::canon::CanonCamera::getPropertyDescFromCamera(EdsPropertyID propert
 }
 
 void ci::canon::CanonCamera::onCameraDisconnected() {
-	CI_LOG_I(deviceBodyId << " :: onCameraDisconnected");
+	CI_LOG_I(deviceBodyId << " :: " << deviceIndex << " :: onCameraDisconnected ");
 	bCameraIsConnected = false;
 	bIsLiveView = false;
 	EdsSetObjectEventHandler(mCamera, kEdsObjectEvent_All, NULL, (EdsVoid*)this);
@@ -606,22 +610,24 @@ void ci::canon::CanonCamera::onCameraDisconnected() {
 	EdsCloseSession(mCamera);
 	EdsRelease(mCamera);
 	EdsRelease(mCamera_list);
-	//deviceIndex = -1;
+	deviceIndex = -1;
 	signal_disconnected.emit(deviceBodyId);
 }
 
 
-void ci::canon::CanonCamera::shutdown(bool terminateSdk)
+void ci::canon::CanonCamera::cleanup(bool terminateSdk)
 {
-	CI_LOG_I(deviceBodyId << " :: shutdown");
+	CI_LOG_I(deviceBodyId << " :: cleanup");
 	bCameraIsConnected = false;
 	bIsLiveView = false;
+	unlockUI();
 	EdsSetObjectEventHandler(mCamera, kEdsObjectEvent_All, NULL, (EdsVoid*)this);
 	EdsSetPropertyEventHandler(mCamera, kEdsPropertyEvent_All, NULL, (EdsVoid*)this);
 	EdsSetCameraStateEventHandler(mCamera, kEdsStateEvent_All, NULL, (EdsVoid*)this);
 	EdsCloseSession( mCamera );
 	EdsRelease(mCamera);
 	EdsRelease(mCamera_list);
+	deviceIndex = -1;
 	if (terminateSdk) {
 		EdsError err = EDS_ERR_OK;
 		err = EdsTerminateSDK();

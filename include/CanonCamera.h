@@ -80,12 +80,11 @@ namespace cinder {
 			CanonCamera();
 			~CanonCamera() {
 				CI_LOG_D(deviceBodyId << " :: good bye.");
-				shutdown();
 			}
 	
 			void setup( int cameraIndex = 0 );
-			void setup(EdsCameraRef cameraRef);
-			void shutdown( bool terminateSdk = false );
+			void setup(EdsCameraRef cameraRef, int cameraIndex);
+			void cleanup( bool terminateSdk = false );
 			bool hearbeat() {
 				EdsError err = EDS_ERR_OK;
 				char buf[800];
@@ -138,7 +137,7 @@ namespace cinder {
 
 			static bool isSDKLoaded;
 
-			//int deviceIndex = -1;
+			int deviceIndex = -1;
 			std::string deviceBodyId = "none";
 			std::string downloadDirectory = "";
 
