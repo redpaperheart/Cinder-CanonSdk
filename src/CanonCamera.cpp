@@ -182,10 +182,12 @@ bool ci::canon::CanonCamera::takePicture() //PhotoHandler * photoHandler)
 	}
 	
 	CI_LOG_I( deviceBodyId << " :: Attempting to take picture ------------------------------------------------------");
+
+	bool success = sendCommand(mCamera, kEdsCameraCommand_TakePicture, 0);
 	
 	//bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely_NonAF);
-	bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely);
-	sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_OFF);
+	//bool success = sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_Completely);
+	//sendCommand(mCamera, kEdsCameraCommand_PressShutterButton, kEdsCameraCommand_ShutterButton_OFF);
 	return success;
 }
 
