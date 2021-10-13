@@ -117,7 +117,7 @@ void ci::canon::CanonCamera::setup(EdsCameraRef cameraRef, int cameraIndex) {
 	//storeDeviceSerial(mCamera);
 	
 	bFrameNew = false;
-	mLivePixels = Surface8u(1024, 680, false, SurfaceChannelOrder::RGB); // what about this resolution?
+//	mLivePixels = Surface8u::create(1024, 680, false, SurfaceChannelOrder::RGB); // what about this resolution?
 
 	//err = getPropertyDescFromCamera(kEdsPropID_ISOSpeed);
 	//err = setProperty(kEdsPropID_ISOSpeed, 0x7d);
@@ -153,6 +153,7 @@ int ci::canon::CanonCamera::getNumConnectedCameras() {
 //		console() << "Cinder-Canon :: Body ID :: " << bodyId << endl;
 //	}
 //}
+
 void ci::canon::CanonCamera::getDeviceInfo( EdsCameraRef cam ) {
 	EdsError err = EDS_ERR_OK;
 	EdsDeviceInfo info;
@@ -293,7 +294,7 @@ EdsError ci::canon::CanonCamera::downloadEvfData( EdsCameraRef camera )
 	
 	// reserve memory
 	BufferRef bufferRef = Buffer::create( image_data, length );
-	mLivePixels = Surface( loadImage( DataSourceBuffer::create(bufferRef), ImageSource::Options(), "jpg" ) );
+	mLivePixels = Surface8u::create( loadImage( DataSourceBuffer::create(bufferRef), ImageSource::Options(), "jpg" ) );
 	bFrameNew = true;
 	
 	// Release stream

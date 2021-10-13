@@ -487,9 +487,9 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_BatteryLevel: {
 			return "Battery level";
 		}
-		case kEdsPropID_CFn: {
-			return "Custom function settings";
-		}
+//		case kEdsPropID_CFn: {
+//			return "Custom function settings";
+//		}
 		case kEdsPropID_SaveTo: {
 			return "Destination where image was saved";
 		}

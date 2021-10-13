@@ -112,7 +112,7 @@ namespace cinder {
 			void downloadImage(EdsDirectoryItemRef dirItem); // , PhotoHandler* photoHandler);
 	
 			void downloadData(){ downloadEvfData(mCamera); };
-			Surface8u getLiveSurface() const{ return mLivePixels; }
+			Surface8uRef getLiveSurface() const{ return mLivePixels; }
 
 			bool isCameraConnected(){ return bCameraIsConnected; };
 			int getNumConnectedCameras();
@@ -161,7 +161,7 @@ namespace cinder {
 	
 			EdsError downloadEvfData( EdsCameraRef camera );
 
-			Surface8u mLivePixels;
+			Surface8uRef mLivePixels;
 
 			bool mUILocked = false;
 			
