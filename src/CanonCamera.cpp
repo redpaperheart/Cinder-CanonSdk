@@ -411,7 +411,7 @@ void ci::canon::CanonCamera::downloadImage(EdsDirectoryItemRef dirItem) //, Phot
 EdsError EDSCALLBACK ci::canon::CanonCamera::handleObjectEvent(EdsUInt32 inEvent, EdsBaseRef inRef, EdsVoid* inContext )
 {
 	ci::canon::CanonCamera* cc = (ci::canon::CanonCamera*)inContext;
-    CI_LOG_D( cc->deviceBodyId << " :: Object Event :: " << CanonEventToString(inEvent));
+    if(cc->logHandleEvents) CI_LOG_D( cc->deviceBodyId << " :: Object Event :: " << CanonEventToString(inEvent));
 
 	switch(inEvent) {
 		//case kEdsObjectEvent_DirItemRequestTransfer:
@@ -433,7 +433,7 @@ EdsError EDSCALLBACK ci::canon::CanonCamera::handleObjectEvent(EdsUInt32 inEvent
 
 EdsError EDSCALLBACK ci::canon::CanonCamera::handlePropertyEvent( EdsUInt32 inEvent, EdsUInt32 inPropertyID, EdsUInt32 inParam, EdsVoid* inContext ) {
 	ci::canon::CanonCamera* cc = (ci::canon::CanonCamera*)inContext;
-	CI_LOG_D(cc->deviceBodyId << " :: Property Event :: " << CanonEventToString(inEvent) << " :: Property: " << CanonPropertyToString(inPropertyID)); // << ", param:" << std::to_string(inParam) );
+    if(cc->logHandleEvents) CI_LOG_D(cc->deviceBodyId << " :: Property Event :: " << CanonEventToString(inEvent) << " :: Property: " << CanonPropertyToString(inPropertyID)); // << ", param:" << std::to_string(inParam) );
 	
 	if( inPropertyID == kEdsPropID_Evf_OutputDevice ){
 		CI_LOG_D(cc->deviceBodyId << " :: ready for live viewing");
@@ -453,7 +453,7 @@ EdsError EDSCALLBACK ci::canon::CanonCamera::handlePropertyEvent( EdsUInt32 inEv
 
 EdsError EDSCALLBACK ci::canon::CanonCamera::handleStateEvent(EdsUInt32 inEvent, EdsUInt32 inParam, EdsVoid* inContext) {
 	ci::canon::CanonCamera* cc = (ci::canon::CanonCamera*)inContext;
-	CI_LOG_D(cc->deviceBodyId << " :: State Event :: " << CanonEventToString(inEvent));
+    if(cc->logHandleEvents) CI_LOG_D(cc->deviceBodyId << " :: State Event :: " << CanonEventToString(inEvent));
 
 	switch(inEvent) {
 		case kEdsStateEvent_Shutdown: {
@@ -497,7 +497,7 @@ EdsError ci::canon::CanonCamera::getPropertyFromCamera(EdsPropertyID propertyID,
 	EdsDataType	dataType = kEdsDataType_Unknown;
 	EdsUInt32   dataSize = 0;
 
-	CI_LOG_D(deviceBodyId << " :: " << CanonPropertyToString(propertyID) << " :: param: " << std::to_string(inParam));
+	if (logGetPropertyDescFromCamera) CI_LOG_D(deviceBodyId << " :: " << CanonPropertyToString(propertyID) << " :: param: " << std::to_string(inParam));
 
 	if (propertyID == kEdsPropID_Unknown) {
 		CI_LOG_D(deviceBodyId << " :: propertyID == kEdsPropID_Unknown :: If unknown is returned for the property ID , the required property must be retrieved again");

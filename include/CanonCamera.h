@@ -153,6 +153,10 @@ namespace cinder {
 			ci::signals::Signal<void(std::string)> signal_photoTaken; //deviceBodyId
 			ci::signals::Signal<void(std::string, std::string)> signal_photoDownloaded; //deviceBodyId, photoPath
 			ci::signals::Signal<void(std::string)> signal_disconnected; //deviceBodyId
+            
+            bool logHandleEvents = false;
+            bool logGetPropertyDescFromCamera = false;
+            bool logPropertySetters = false;
 
 		  protected:
 			void onCameraDisconnected();
@@ -185,6 +189,7 @@ namespace cinder {
 			EdsRect	  _evfZoomRect;
 			EdsUInt32 _evfAFMode;
 			EdsUInt32 _AFMode;
+            EdsUInt32 _Record;
 
 			EdsFocusInfo _focusInfo;
 
@@ -219,32 +224,72 @@ namespace cinder {
 			void setAEMode(EdsUInt32 value) { _AEMode = value; }
 			void setTv(EdsUInt32 value) { 
 				_Tv = value; 
-				CI_LOG_D(deviceBodyId << " :: _Tv: " << CanonTvPropertyDataToString(value));
+				if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _Tv: " << CanonTvPropertyDataToString(value));
 			}
 			void setAv(EdsUInt32 value) { 
 				_Av = value; 
-				CI_LOG_D(deviceBodyId << " :: _Av: " << CanonAvPropertyDataToString(value));
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _Av: " << CanonAvPropertyDataToString(value));
 			}
 			void setIso(EdsUInt32 value) { 
 				_Iso = value; 
-				CI_LOG_D(deviceBodyId << " :: _Iso: " << CanonIsoPropertyDataToString(value)); 
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _Iso: " << CanonIsoPropertyDataToString(value)); 
 			}
 			void setExposureCompensation(EdsUInt32 value) { 
 				_ExposureCompensation = value; 
-				CI_LOG_D(deviceBodyId << " :: _ExposureCompensation: " << value); 
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _ExposureCompensation: " << value);
 			}
-			void setAFMode(EdsUInt32 value) { _AFMode = value; CI_LOG_D(deviceBodyId << " :: _AFMode: " << value << " :: " << CanonAFModeDataToString(value)); }
-			void setMeteringMode(EdsUInt32 value) { _MeteringMode = value; CI_LOG_D(deviceBodyId << " :: _MeteringMode: " << value); }
-			void setImageQuality(EdsUInt32 value) { _ImageQuality = value; CI_LOG_D(deviceBodyId << " :: _ImageQuality: " << value); }
-			void setEvfMode(EdsUInt32 value) { _evfMode = value; CI_LOG_D(deviceBodyId << " :: _evfMode: " << value); }
-			void setEvfOutputDevice(EdsUInt32 value) { _evfOutputDevice = value; CI_LOG_D(deviceBodyId << " :: _evfOutputDevice: " << value); }
-			void setEvfDepthOfFieldPreview(EdsUInt32 value) { _evfDepthOfFieldPreview = value; CI_LOG_D(deviceBodyId << " :: _evfDepthOfFieldPreview: " << value); }
-			void setEvfZoom(EdsUInt32 value) { _evfZoom = value; CI_LOG_D(deviceBodyId << " :: _evfZoom: " << value); }
-			void setEvfZoomPosition(EdsPoint value) { _evfZoomPosition = value; }
-			void setEvfZoomRect(EdsRect value) { _evfZoomRect = value; }
-			void setModelName(EdsChar* modelName) { _modelName = std::string(modelName); }
-			void setEvfAFMode(EdsUInt32 value) { _evfAFMode = value; CI_LOG_D(deviceBodyId << " :: _evfAFMode: " << value); }
-			void setFocusInfo(EdsFocusInfo value) { _focusInfo = value; }
+            void setRecord(EdsUInt32 value) {
+                _Record = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _Record: " << value << " :: " << value);
+            }
+			void setAFMode(EdsUInt32 value) {
+                _AFMode = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _AFMode: " << value << " :: " << CanonAFModeDataToString(value));
+            }
+			void setMeteringMode(EdsUInt32 value) {
+                _MeteringMode = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _MeteringMode: " << value);
+            }
+			void setImageQuality(EdsUInt32 value) {
+                _ImageQuality = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _ImageQuality: " << value);
+            }
+			void setEvfMode(EdsUInt32 value) {
+                _evfMode = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _evfMode: " << value);
+            }
+			void setEvfOutputDevice(EdsUInt32 value) {
+                _evfOutputDevice = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _evfOutputDevice: " << value);
+            }
+			void setEvfDepthOfFieldPreview(EdsUInt32 value) {
+                _evfDepthOfFieldPreview = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _evfDepthOfFieldPreview: " << value);
+            }
+			void setEvfZoom(EdsUInt32 value) {
+                _evfZoom = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _evfZoom: " << value);
+            }
+			void setEvfZoomPosition(EdsPoint value) {
+                _evfZoomPosition = value;
+//                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _evfZoomPosition: " << value);
+            }
+			void setEvfZoomRect(EdsRect value) {
+                _evfZoomRect = value;
+//                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _evfZoomRect: " << value);
+            }
+			void setModelName(EdsChar* modelName) {
+                _modelName = std::string(modelName);
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _modelName: " << _modelName);
+            }
+			void setEvfAFMode(EdsUInt32 value) {
+                _evfAFMode = value;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _evfAFMode: " << value);
+            }
+			void setFocusInfo(EdsFocusInfo value) {
+                _focusInfo = value;
+//                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _focusInfo: " << value);
+            }
 
 			// Taking a picture parameter
 			EdsUInt32 getAEMode() const { return _AEMode; }
@@ -277,24 +322,36 @@ namespace cinder {
 			//List of value in which taking a picture parameter can be set
 			void setAEModeDesc(const EdsPropertyDesc* desc) { 
 				_AEModeDesc = *desc;  
-				CI_LOG_D(deviceBodyId << " :: _AEModeDesc: " << CanonPropertyDescToString(desc)); 
+				if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _AEModeDesc: " << CanonPropertyDescToString(desc));
 			}
 			void setAvDesc(const EdsPropertyDesc* desc) { 
 				_AvDesc = *desc;  
-				CI_LOG_D(deviceBodyId << " :: _AvDesc: " << CanonAvPropertyDescToString(desc)); 
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _AvDesc: " << CanonAvPropertyDescToString(desc));
 			}
 			void setTvDesc(const EdsPropertyDesc* desc) { 
 				_TvDesc = *desc;  
-				CI_LOG_D(deviceBodyId << " :: _TvDesc: " << CanonTvPropertyDescToString(desc)); 
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _TvDesc: " << CanonTvPropertyDescToString(desc));
 			}
 			void setIsoDesc(const EdsPropertyDesc* desc) { 
 				_IsoDesc = *desc; 
-				CI_LOG_D(deviceBodyId << " :: _IsoDesc: " << CanonIsoPropertyDescToString(desc)); 
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _IsoDesc: " << CanonIsoPropertyDescToString(desc));
 			}
-			void setMeteringModeDesc(const EdsPropertyDesc* desc) { _MeteringModeDesc = *desc; CI_LOG_D(deviceBodyId << " :: _MeteringModeDesc: " << CanonPropertyDescToString(desc)); }
-			void setExposureCompensationDesc(const EdsPropertyDesc* desc) { _ExposureCompensationDesc = *desc; CI_LOG_D(deviceBodyId << " :: _ExposureCompensationDesc: " << CanonPropertyDescToString(desc)); }
-			void setImageQualityDesc(const EdsPropertyDesc* desc) { _ImageQualityDesc = *desc; CI_LOG_D(deviceBodyId << " :: _ImageQualityDesc: " << CanonPropertyDescToString(desc)); }
-			void setEvfAFModeDesc(const EdsPropertyDesc* desc) { _evfAFModeDesc = *desc; CI_LOG_D(deviceBodyId << " :: _evfAFModeDesc: " << CanonPropertyDescToString(desc)); }
+			void setMeteringModeDesc(const EdsPropertyDesc* desc) {
+                _MeteringModeDesc = *desc;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _MeteringModeDesc: " << CanonPropertyDescToString(desc));
+            }
+			void setExposureCompensationDesc(const EdsPropertyDesc* desc) {
+                _ExposureCompensationDesc = *desc;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _ExposureCompensationDesc: " << CanonPropertyDescToString(desc));
+            }
+			void setImageQualityDesc(const EdsPropertyDesc* desc) {
+                _ImageQualityDesc = *desc;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _ImageQualityDesc: " << CanonPropertyDescToString(desc));
+            }
+			void setEvfAFModeDesc(const EdsPropertyDesc* desc) {
+                _evfAFModeDesc = *desc;
+                if (logPropertySetters) CI_LOG_D(deviceBodyId << " :: _evfAFModeDesc: " << CanonPropertyDescToString(desc));
+            }
 
 		  public:
 			//Setting of taking a picture parameter(UInt32)
@@ -313,6 +370,7 @@ namespace cinder {
 				case kEdsPropID_Evf_DepthOfFieldPreview:setEvfDepthOfFieldPreview(value);	break;
 				case kEdsPropID_Evf_AFMode:				setEvfAFMode(value);				break;
 				case kEdsPropID_AFMode:					setAFMode(value);					break;
+                case kEdsPropID_Record:                 setRecord(value);                   break;
 				default:								CI_LOG_W(deviceBodyId << " :: unhandled property :: " << CanonPropertyToString(propertyID) << " :: " << std::to_string(value)); break;
 				}
 			}
@@ -324,7 +382,7 @@ namespace cinder {
 				{
 				case kEdsPropID_BodyIDEx:
 					deviceBodyId = std::string(str);
-					CI_LOG_I("Body ID :: " << deviceBodyId);
+					if(logPropertySetters) CI_LOG_I("Body ID :: " << deviceBodyId);
 					break;
 				case kEdsPropID_ProductName:
 					CI_LOG_I("kEdsPropID_ProductName:" << str);

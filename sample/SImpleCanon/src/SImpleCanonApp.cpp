@@ -98,8 +98,8 @@ void SimpleCanonApp::draw()
 
 void SimpleCanonApp::takePhoto()
 {
-    mCamera.endLiveView();
-    mCamera.takePicture();
+//    mCamera.endLiveView();
+//    mCamera.takePicture();
     mFlashAlpha = 1.0f;
     app::timeline().apply(&mFlashAlpha, 0.0f, 3.0f);
 }

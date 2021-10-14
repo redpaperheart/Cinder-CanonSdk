@@ -458,6 +458,10 @@ inline std::string CanonAvPropertyDataToString(EdsUInt32 data) {
 	return str;
 }
 
+
+
+
+
 inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 	switch(nPropID) {
 		case kEdsPropID_Unknown: {
@@ -466,9 +470,9 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_ProductName: {
 			return "Productname";
 		}
-            //		case kEdsPropID_BodyID: {
-            //			return "Body ID";
-            //		}
+        case kEdsPropID_TempStatus: {
+            return "Temp Status";
+        }
 		case kEdsPropID_BodyIDEx: {
 			return "Body ID";
 		}
@@ -700,12 +704,12 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_Copyright: {
 			return "Copyright";
 		}
-//        case kEdsPropID_DepthOfField: {
-//            return "Depth of field";
-//        }
-//        case kEdsPropID_EFCompensation: {
-//            return "EF compensation";
-//        }
+        case kEdsPropID_AEModeSelect: {
+            return "AEModeSelect";
+        }
+        case kEdsPropID_PowerZoom_Speed: {
+            return "PowerZoom Speed";
+        }
 		case kEdsPropID_Evf_OutputDevice: {
 			return "Evf output device";
 		}
@@ -727,9 +731,6 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_Evf_ZoomPosition: {
 			return "Evf zoom position";
 		}
-//        case kEdsPropID_Evf_FocusAid: {
-//            return "Evf focus aid";
-//        }
 		case kEdsPropID_Evf_Histogram: {
 			return "Evf historgram";
 		}
@@ -742,12 +743,94 @@ inline const char* CanonPropertyToString(EdsPropertyID nPropID) {
 		case kEdsPropID_Evf_AFMode: {
 			return "Evf AF mode";
 		}
+        case kEdsPropID_Record: {
+            return "Record";
+        }
+        case kEdsPropID_Evf_HistogramY: {
+            return "Evf_HistogramY";
+        }
+        case kEdsPropID_Evf_HistogramR: {
+            return "Evf_HistogramR";
+        }
+        case kEdsPropID_Evf_HistogramG: {
+            return "Evf_HistogramR";
+        }
+        case kEdsPropID_Evf_HistogramB: {
+            return "Evf_HistogramB";
+        }
 		case kEdsPropID_Evf_CoordinateSystem: {
-			return "Evf coordinate system";
+			return "Evf_CoordinateSystem";
 		}
 		case kEdsPropID_Evf_ZoomRect: {
 			return "Evf zoomrect";
 		}
+        case kEdsPropID_Evf_ImageClipRect: {
+            return "Evf_ImageClipRect";
+        }
+        case kEdsPropID_Evf_PowerZoom_CurPosition: {
+            return "Evf_PowerZoom_CurPosition";
+        }
+        case kEdsPropID_Evf_PowerZoom_MaxPosition: {
+            return "Evf_PowerZoom_MaxPosition";
+        }
+        case kEdsPropID_Evf_PowerZoom_MinPosition: {
+            return "Evf_PowerZoom_MinPosition";
+        }
+        /*----------------------------------
+        Limited Properties
+        ----------------------------------*/
+        case kEdsPropID_UTCTime: {
+            return "UTCTime";
+        }
+        case kEdsPropID_TimeZone: {
+            return "TimeZone";
+        }
+        case kEdsPropID_SummerTimeSetting: {
+            return "SummerTimeSetting";
+        }
+        case kEdsPropID_ManualWhiteBalanceData: {
+            return "ManualWhiteBalanceData";
+        }
+        case kEdsPropID_MirrorLockUpState: {
+            return "MirrorLockUpState";
+        }
+        case kEdsPropID_FixedMovie: {
+            return "FixedMovie";
+        }
+        case kEdsPropID_MovieParam: {
+            return "MovieParam";
+        }
+        case kEdsPropID_Aspect: {
+            return "Aspect";
+        }
+        case kEdsPropID_MirrorUpSetting: {
+            return "MirrorUpSetting";
+        }
+        case kEdsPropID_AutoPowerOffSetting: {
+            return "AutoPowerOffSetting";
+        }
+        case kEdsPropID_Evf_ClickWBCoeffs: {
+            return "Evf_ClickWBCoeffs";
+        }
+        case kEdsPropID_EVF_RollingPitching: {
+            return "EVF_RollingPitching";
+        }
+        case kEdsPropID_Evf_VisibleRect: {
+            return "Evf_VisibleRect";
+        }
+
+            /*----------------------------------
+             DC Properties
+            ----------------------------------*/
+        case kEdsPropID_DC_Zoom: {
+            return "DC_Zoom";
+        }
+        case kEdsPropID_DC_Strobe: {
+            return "DC_Strobe";
+        }
+        case kEdsPropID_LensBarrelStatus: {
+            return "LensBarrelStatus";
+        }
             
 		default:break;
 	};
